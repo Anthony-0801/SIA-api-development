@@ -22,7 +22,7 @@ $year = $data->year;
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "db_jsits";
+$dbname = "db_jsites";
 try {
 $conn = new PDO("mysql:host=$servername;dbname=$dbname",
 $username, $password);
@@ -60,14 +60,14 @@ $reference =$data->reference;
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "db_jsits";
+$dbname = "db_jsites";
 try {
 $conn = new PDO("mysql:host=$servername;dbname=$dbname",
 $username, $password);
 // set the PDO error mode to exception
 $conn->setAttribute(PDO::ATTR_ERRMODE,
 PDO::ERRMODE_EXCEPTION);
-$sql = "INSERT INTO payment (studentId, section, sem, year, paymentamount)
+$sql = "INSERT INTO payment (studentId, section, sem, year, paymentamount, paymentdate, reference)
 VALUES ('". $studentId."','". $section."','". $sem."','". $year."','".$paymentamount."','".$paymentdate."','".$reference."')";
 // use exec() because no results are returned
 $conn->exec($sql);
@@ -87,7 +87,7 @@ $app->get('/postretrieve', function (Request $request, Response $response, array
     $servername = "localhost";
     $username = "root";
     $password = "";
-    $dbname = "db_jsits";
+    $dbname = "db_jsites";
 
     // Create connection
     $conn = new mysqli($servername, $username, $password, $dbname);
@@ -152,6 +152,77 @@ $app->get('/postretrieve', function (Request $request, Response $response, array
 
     $conn->close();
     return $response->withHeader('Content-Type', 'application/json');
+});
+
+//endpoint post Update
+$app->post('/postupdate', function (Request $request, Response $response, array $args)
+{
+    $data=json_decode($request->getBody());
+$studentId = $data->studentId;
+$section =$data->section ;
+$sem =$data->sem ;
+$year =$data->year;
+$paymentamount =$data->paymentamount;
+$paymentdate =$data->paymentdate;
+$reference =$data->reference;
+
+
+//Database
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "db_jsites";
+try {
+$conn = new PDO("mysql:host=$servername;dbname=$dbname",
+$username, $password);
+// set the PDO error mode to exception
+$conn->setAttribute(PDO::ATTR_ERRMODE,
+PDO::ERRMODE_EXCEPTION);
+$sql = "UPDATE payment SET section='$section', sem='$sem', year= '$year', paymentamount= '$paymentamount', paymentdate= '$paymentdate', reference= '$reference' WHERE studentId='$studentId' ";
+
+// use exec() because no results are returned
+$conn->exec($sql);
+$response->getBody()->
+write(json_encode(array("status"=>"success","data"=>null)));
+} catch(PDOException $e){
+$response->getBody()->write(json_encode(array("status"=>"error",
+"message"=>$e->getMessage())));
+}
+$conn = null;
+ return $response;
+});
+
+//endpoint post Delete
+$app->post('/postdelete', function (Request $request, Response $response, array $args)
+{
+    $data=json_decode($request->getBody());
+$studentId = $data->studentId;
+
+
+
+//Database
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "db_jsites";
+try {
+$conn = new PDO("mysql:host=$servername;dbname=$dbname",
+$username, $password);
+// set the PDO error mode to exception
+$conn->setAttribute(PDO::ATTR_ERRMODE,
+PDO::ERRMODE_EXCEPTION);
+$sql = "DELETE FROM payment WHERE studentId=$studentId";
+
+// use exec() because no results are returned
+$conn->exec($sql);
+$response->getBody()->
+write(json_encode(array("status"=>"success","data"=>null)));
+} catch(PDOException $e){
+$response->getBody()->write(json_encode(array("status"=>"error",
+"message"=>$e->getMessage())));
+}
+$conn = null;
+ return $response;
 });
 
 $app->run();

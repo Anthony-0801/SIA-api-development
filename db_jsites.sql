@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 14, 2023 at 05:51 AM
+-- Generation Time: Nov 20, 2023 at 03:38 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `db_jsits`
+-- Database: `db_jsites`
 --
 
 -- --------------------------------------------------------
@@ -33,15 +33,17 @@ CREATE TABLE `payment` (
   `section` varchar(255) NOT NULL,
   `sem` varchar(255) NOT NULL,
   `year` varchar(255) NOT NULL,
-  `paymentamount` int(11) NOT NULL
+  `paymentamount` int(11) NOT NULL,
+  `paymentdate` date NOT NULL,
+  `reference` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `payment`
 --
 
-INSERT INTO `payment` (`id`, `studentId`, `section`, `sem`, `year`, `paymentamount`) VALUES
-(2, '201-1509-2', 'B', '1st', '4th year', 20);
+INSERT INTO `payment` (`id`, `studentId`, `section`, `sem`, `year`, `paymentamount`, `paymentdate`, `reference`) VALUES
+(16, '201-1509-2', 'B', '2nd', '4th year', 500, '2023-11-20', 'Fully paid');
 
 -- --------------------------------------------------------
 
@@ -62,7 +64,9 @@ CREATE TABLE `registration` (
 --
 
 INSERT INTO `registration` (`id`, `Studentname`, `StudentId`, `section`, `year`) VALUES
-(1, 'Jaynard A Raqueno', '201-1509-2', 'B', '4th year');
+(1, 'Jaynard A Raqueno', '201-1509-2', 'B', '4th year'),
+(2, 'Jaynard A. Raqueño', '', 'B', '4th year'),
+(3, 'Jaynard A. Raqueño', '201-1509-2', 'B', '4th year');
 
 -- --------------------------------------------------------
 
@@ -114,13 +118,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `payment`
 --
 ALTER TABLE `payment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `registration`
 --
 ALTER TABLE `registration`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `users`

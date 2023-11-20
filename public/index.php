@@ -8,7 +8,7 @@ $app = new \Slim\App();
 
 
 
-//endpoint postRegistration
+//endpoint for Registration
 $app->post('/postRegistration', function (Request $request, Response $response, array $args)
 {
 $data=json_decode($request->getBody());
@@ -43,7 +43,7 @@ $conn = null;
  return $response;
 });
 
-//endpoint postPayment
+//endpoint for Payment
 $app->post('/postPayment', function (Request $request, Response $response, array $args)
 {
 $data=json_decode($request->getBody());
@@ -81,7 +81,7 @@ $conn = null;
  return $response;
 });
 
-
+//endpoint for retrieval
 $app->get('/postretrieve', function (Request $request, Response $response, array $args) {
     // Database
     $servername = "localhost";
@@ -154,7 +154,7 @@ $app->get('/postretrieve', function (Request $request, Response $response, array
     return $response->withHeader('Content-Type', 'application/json');
 });
 
-//endpoint post Update
+//endpoint for Update
 $app->post('/postupdate', function (Request $request, Response $response, array $args)
 {
     $data=json_decode($request->getBody());
@@ -192,7 +192,7 @@ $conn = null;
  return $response;
 });
 
-//endpoint post Delete
+//endpoint for Delete
 $app->post('/postdelete', function (Request $request, Response $response, array $args)
 {
     $data=json_decode($request->getBody());
@@ -224,6 +224,86 @@ $response->getBody()->write(json_encode(array("status"=>"error",
 $conn = null;
  return $response;
 });
+
+//endpoint for history
+$app->get('/posthistory', function (Request $request, Response $response, array $args) {
+    // Database
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "db_jsites";
+
+    // Create connection
+    $conn = new mysqli($servername, $username, $password, $dbname);
+
+    // Check connection
+    if ($conn->connect_error) {
+        $error = array("status" => "error", "message" => "Connection failed: " . $conn->connect_error);
+        $response->getBody()->write(json_encode($error));
+        return $response->withHeader('Content-Type', 'application/json')->withStatus(500);
+    }
+
+    // Retrieve query parameters
+    $studentId = $request->getQueryParams()['studentId'] ?? null;
+    $section = $request->getQueryParams()['section'] ?? null;
+    $sem = $request->getQueryParams()['sem'] ?? null; // Add semester parameter
+    $year = $request->getQueryParams()['year'] ?? null;
+
+    // Build the SQL query based on the provided parameters
+    $sql = "SELECT * FROM payment WHERE 1 ";
+
+    if ($studentId !== null) {
+        $sql .= " AND studentId = '$studentId'";
+    }
+
+    if ($section !== null) {
+        $sql .= " AND section = '$section'";
+    }
+
+    if ($sem !== null) { // Add condition for semester
+        $sql .= " AND sem = '$sem'";
+    }
+
+    if ($year !== null) {
+        $sql .= " AND year = '$year'";
+    }
+
+    $result = $conn->query($sql);
+
+    if ($result === false) {
+        $error = array("status" => "error", "message" => "Query failed: " . $conn->error);
+        $response->getBody()->write(json_encode($error));
+        $conn->close();
+        return $response->withHeader('Content-Type', 'application/json')->withStatus(500);
+    }
+
+    if ($result->num_rows > 0) {
+        $data = array();
+
+        while ($row = $result->fetch_assoc()) {
+            array_push($data, array(
+                "studentId" => $row["studentId"],
+                "section" => $row["section"],
+                "sem" => $row["sem"],
+                "year" => $row["year"],
+                "paymentamount" => $row["paymentamount"],
+                "paymentdate" => $row["paymentdate"],
+                "reference" => $row["reference"]
+            ));
+        }
+
+        $data_body = array("status" => "success", "data" => $data);
+        $response->getBody()->write(json_encode($data_body));
+    } else {
+        $data_body = array("status" => "success", "data" => null);
+        $response->getBody()->write(json_encode($data_body));
+    }
+
+    $conn->close();
+    return $response->withHeader('Content-Type', 'application/json');
+});
+
+
 
 $app->run();
 

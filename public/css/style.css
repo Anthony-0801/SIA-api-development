@@ -12,7 +12,7 @@
 
 #search-title {
     background-color: #E55604;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a bottom shadow */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
 }
 
 #search-title h1 {
@@ -34,7 +34,7 @@
     padding: 8px;
     font-size: 14px;
     border: 2px solid #7F7F7F;
-    border-radius: 20px 0 0 20px; /* Adjusted border-radius for the left */
+    border-radius: 20px 0 0 20px; 
     box-sizing: border-box;
 }
 
@@ -44,7 +44,7 @@
     background-color: #26577C;
     color: #fff;
     border: none;
-    border-radius: 20px; /* Set border-radius the same on all sides */
+    border-radius: 20px; 
     cursor: pointer;
     transition: background-color 0.3s ease;
     width: 150px;
@@ -56,7 +56,7 @@
 }
 
 .container-table {
-    margin-top: 20px; /* Added margin for spacing */
+    margin-top: 20px; 
 }
 
 table {
@@ -77,4 +77,8 @@ td {
 
 tr {
     padding: 5px;
+}
+
+nav {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
 }

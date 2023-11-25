@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start; /* Align to the left side */
+      height: 100vh;
+    }
+
+    #signup-box {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      max-width: 400px; /* Adjust the max-width to make it slimmer */
+      margin-left: 90px; /* Move it a bit to the right */
+      text-align: center; /* Center the text */
+    }
+
+    #signup-box h2 {
+      color: #333;
+      text-align: left; /* Align to the left */
+    }
+
+    #signup-box p.setup-text {
+      color: #666;
+      text-align: left; /* Align to the left */
+      margin-bottom: 16px; /* Adjust margin for spacing */
+    }
+
+    #signup-box p.login-text {
+      color: #666;
+      text-align: center; /* Align to the center */
+      margin: 16px 0; /* Adjust margin for centering */
+    }
+
+    #signup-box input {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      box-sizing: border-box;
+    }
+
+    #login-btn {
+      background-color: #E55604;
+      color: #fff;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%; /* Set the width to 100% */
+    }
+
+    #login-link {
+      color: #E55604; /* Change the color to #E55604 */
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="signup-box">
+    <h2>SIGN UP</h2>
+    <p class="setup-text">Let's get you set up</p>
+    <form action="#" method="post">
+      <input type="text" name="student-id" placeholder="Student ID" required>
+      <input type="text" name="student-name" placeholder="Student Name" required>
+      <input type="text" name="year" placeholder="Year" required>
+      <input type="text" name="position" placeholder="Position" required>
+      <button id="login-btn" type="submit">Login</button>
+    </form>
+    <p class="login-text">Already have an account? <a href="#" id="login-link">Login here</a></p>
+  </div>
+</body>
+</html>

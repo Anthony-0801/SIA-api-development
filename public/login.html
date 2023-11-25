@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Form</title>
+  <link rel="stylesheet" href="css/login.css">
+  <script src="js/login.js"></script>
+</head>
+<body style="background-image: url('bg.png');">
+  <div id="login-box">
+    <h2>WELCOME BACK!</h2>
+    <p class="welcome-text">Login to continue</p>
+    <form action="#" method="post">
+        <div class="form-data"  v-if="!submitted">
+                       
+            <div class="forms-inputs mb-4"> <span>Username</span> <input required autocomplete="off" type="text" v-model="text" v-bind:class="{'form-control':true, 'is-invalid' : !validEmail(text) && textBlured}" v-on:blur="textBlured = true">
+                
+            </div>
+            <div class="forms-inputs mb-4"> <span>Password</span> <input required autocomplete="off" type="password" v-model="password" v-bind:class="{'form-control':true, 'is-invalid' : !validPassword(password) && passwordBlured}" v-on:blur="passwordBlured = true">
+                
+            </div>
+            <div class="mb-3"> <button v-on:click.stop.prevent="submit" class="btn btn-dark w-100" style="background-color: #e55604; color: #fff;">LOGIN</button> </div>
+        </div>
+    </form>
+   
+  </div>
+</body>
+</html>

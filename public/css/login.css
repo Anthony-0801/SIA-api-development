@@ -1,0 +1,85 @@
+body {
+    background-image: url(bg.png);
+  font-family: Arial, sans-serif;
+  background-color: #f2f2f2;
+  margin: 0;
+  display: flex;
+  flex-direction: column; /* Updated to column layout */
+  align-items: end; /* Center horizontally */
+  justify-content: center; /* Center vertically */
+  height: 100vh;
+  margin-right: 50px; /* Add margin for spacing */
+  padding-right: 200px;
+}
+
+
+
+#login-box {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 300px; /* Adjust the max-width to make it slimmer */
+  
+}
+
+#login-box h2 {
+  color: #333;
+  text-align: left; /* Align to the left */
+}
+
+#login-box p.welcome-text {
+  color: #666;
+  text-align: left; /* Align to the left */
+  margin-bottom: 16px; /* Adjust margin for spacing */
+  padding-bottom: 5px;
+}
+
+.right{
+float: right; 
+margin-left: 900px;
+}
+
+
+.forms-inputs {
+position: relative;
+margin-bottom: 30px;
+}
+
+.forms-inputs span {
+position: absolute;
+top: -18px;
+left: 10px;
+background-color: #fff;
+padding: 5px 10px;
+font-size: 15px;
+}
+
+.forms-inputs input {
+height: 45px;
+width: 300px;
+border-radius: 8px;
+border: 2px solid #eee;
+}
+
+.forms-inputs input:focus {
+box-shadow: none;
+outline: none;
+border: 2px solid #b4b4b3;
+}
+
+.btn {
+height: 30px;
+width: 300px;
+border-radius: 8px;
+border:none;
+}
+
+.success-data {
+display: flex;
+flex-direction: column;
+}
+
+.bxs-badge-check {
+font-size: 90px;
+}

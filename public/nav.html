@@ -6,6 +6,135 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JSITEs</title>
     <link rel="icon" href="img/logo.png">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .right-nav {
+            height: 100%;
+            width: 300px;
+            background-color: white;
+            position: fixed;
+            top: 0;
+            left: 0;
+            overflow-x: hidden;
+            box-shadow: 5px 0 5px -5px rgba(0, 0, 0, 0.5);
+        }
+
+        .right-nav p {
+            margin-left: 20px;
+            font-family: sans-serif;
+        }
+
+        .right-nav-top {
+            background-color: #26577C;
+            height: 25%;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .right-nav-top img {
+            height: 90px;
+            width: auto;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 10px;
+        }
+
+        .right-nav-top p {
+            color: white;
+            font-size: 16px;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+            font-weight: bold;
+            font-size: 90%;
+        }
+
+        .right-nav-bottom {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .right-nav-bottom a {
+            padding: 5px 40px;
+            text-decoration: none;
+            font-size: 18px;
+            color: #7F7F7F;
+            font-family: sans-serif;
+            display: flex;
+            align-items: center; 
+            transition-duration: 0.4s;
+            font-size: medium;
+        }
+
+        .right-nav-bottom img {
+            height: 30px;
+            margin-right: 20px;
+        }
+
+        .right-nav-bottom a:hover {
+            background-color: #555;
+            color: white;
+        }
+
+        .content {
+            margin-left: 220px;
+            padding: 20px;
+        }
+
+        .top-nav {
+            height: 65px;
+            background-color: white;
+            box-shadow: 0px 5px 5px -5px rgba(0, 0, 0, 0.5);
+            display: flex;
+        }
+
+        .top-nav button {
+            background-color: white;
+            border: none;
+            display: flex;
+            margin-top: 20px;
+            width: 25px;
+            height: 25px;
+            margin-left: 320px;
+            flex-direction: column;
+            align-items: center; 
+            justify-content: space-around; 
+            border-radius: 2px;
+        }
+
+        .top-nav button img {
+            width: 20px;
+        }
+
+        .top-nav button:hover {
+            background-color: lightgray;
+        }
+
+        @media (max-width: 768px) {
+            .right-nav {
+                display: none;
+            }
+
+            .content {
+                margin-left: 0;
+            }
+
+            .top-nav {
+                margin-left: -300px;
+            }
+        }
+
+    </style>
 </head>
 
 <body>

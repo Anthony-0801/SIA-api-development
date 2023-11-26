@@ -1,0 +1,106 @@
+body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f2f2f2;
+  font-family: Arial, sans-serif;
+  box-sizing: border-box;
+}
+
+.welcome-heading {
+  text-align: left;
+  margin-bottom: 1px;
+  font-size: 24px;
+  margin-left: 10px;
+}
+
+form {
+  height: 400px;
+  width: 450px;
+  background-color: #fff;
+  padding: 10px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 10px;
+  box-shadow: -3px 3px 10px rgba(0, 0, 0, 0.4);
+  margin-left: 65%;
+}
+
+h1 {
+  text-align: center;
+}
+
+.login-text {
+  text-align: left;
+  color: #555;
+  margin-top: 1px;
+  margin-left: 10px;
+}
+
+.input-fields {
+  position: relative;
+  width: 430px;
+  height: 40px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.input-fields input {
+  width: 100%;
+  height: 100%;
+  outline: 1.4px solid black;
+  border: none;
+  border-radius: 8px;
+  padding: 5px 10px;
+  font-size: 18px;
+}
+
+.input-fields input:focus {
+  outline: 2px solid #E55604; 
+}
+
+.input-fields input:focus + label {
+  top: -10px;
+  color: #1f3040;
+}
+
+.input-fields input:not(:placeholder-shown) + label {
+  top: -10px;
+  color: #1f3040;
+}
+
+.input-fields label {
+  position: absolute;
+  top: 15px;
+  left: 5px;
+  font-size: 18px;
+  padding: 0 5px;
+  pointer-events: none;
+  transition: top 0.2s;
+  background-color: white;
+  color: rgb(99, 99, 99);
+}
+
+.input-fields span {
+  position: absolute;
+  top: 15px;
+  left: 400px;
+  cursor: pointer;
+}
+
+#btn {
+  margin-top: 30px;
+  padding: 10px 20px;
+  border: none;
+  color: white;
+  background-color: #E55604;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+}

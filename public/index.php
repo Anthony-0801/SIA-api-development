@@ -1,4 +1,14 @@
 <?php
+// Enable CORS for all origins
+header("Access-Control-Allow-Origin: *");
+
+// Allow the following methods
+header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
+
+// Allow the following headers
+header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
+
+
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 
@@ -66,13 +76,8 @@ $app->get('/postretrieve', function (Request $request, Response $response, array
         return $response->withHeader('Content-Type', 'application/json')->withStatus(500);
     }
 
-    $studentId = $request->getQueryParams()['studentId'] ?? null;
-
-    $sql = "SELECT * FROM payment WHERE 1 ";
-
-    if ($studentId !== null) {
-        $sql .= " AND studentId = '$studentId'";
-    }
+    // No need to filter by studentId if it's not provided
+    $sql = "SELECT * FROM payment WHERE 1";
 
     $result = $conn->query($sql);
 
@@ -92,8 +97,8 @@ $app->get('/postretrieve', function (Request $request, Response $response, array
             "sem" => $row["sem"],
             "section" => $row["section"],
             "year" => $row["year"],
-            "amount" => isset($row["paymentamount"]) ? $row["paymentamount"] : null,
-            "date" => isset($row["paymentdate"]) ? $row["paymentdate"] : null,
+            "amount" => isset($row["amount"]) ? $row["amount"] : null,
+            "date" => isset($row["date"]) ? $row["date"] : null,
             "office_in_charge" => isset($row["office_in_charge"]) ? $row["office_in_charge"] : null,
             "action" => isset($row["action"]) ? $row["action"] : null
         );
@@ -107,6 +112,7 @@ $app->get('/postretrieve', function (Request $request, Response $response, array
     $conn->close();
     return $response->withHeader('Content-Type', 'application/json');
 });
+
 
 
 //endpoint for Update

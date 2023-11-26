@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 20, 2023 at 03:38 AM
+-- Generation Time: Nov 26, 2023 at 09:20 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -29,21 +29,24 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `payment` (
   `id` int(11) NOT NULL,
+  `studentname` varchar(255) NOT NULL,
   `studentId` varchar(255) NOT NULL,
-  `section` varchar(255) NOT NULL,
   `sem` varchar(255) NOT NULL,
+  `section` varchar(255) NOT NULL,
   `year` varchar(255) NOT NULL,
-  `paymentamount` int(11) NOT NULL,
-  `paymentdate` date NOT NULL,
-  `reference` varchar(255) NOT NULL
+  `amount` int(11) NOT NULL,
+  `date` date NOT NULL,
+  `office_in_charge` varchar(255) NOT NULL,
+  `action` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `payment`
 --
 
-INSERT INTO `payment` (`id`, `studentId`, `section`, `sem`, `year`, `paymentamount`, `paymentdate`, `reference`) VALUES
-(16, '201-1509-2', 'B', '2nd', '4th year', 500, '2023-11-20', 'Fully paid');
+INSERT INTO `payment` (`id`, `studentname`, `studentId`, `sem`, `section`, `year`, `amount`, `date`, `office_in_charge`, `action`) VALUES
+(1, 'Jaynard A. Raqueño', '201-1509-2', '1st', 'B', '2023', 500, '2023-11-27', 'Office A', 'Paid'),
+(2, 'Jaynard A. Raqueño', '201-1509-2', '1st', 'B', '2023', 500, '2023-11-27', 'Office A', 'Paid');
 
 -- --------------------------------------------------------
 
@@ -118,7 +121,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `payment`
 --
 ALTER TABLE `payment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `registration`

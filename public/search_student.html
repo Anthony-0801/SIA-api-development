@@ -6,14 +6,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JSITEs Members</title>
     <script type="text/javascript" src="js/script.js"></script>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/search_student.css">
+    <link rel="stylesheet" href="css/nav.css">
     <link rel="icon" href="img/LOGO.png">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 
 <body>
+    <div class="top-nav">
+        <button id="navToggle">
+            <img src="img/three-lines.png" alt="Nav Button">
+        </button>
+    </div>
+    <div class="right-nav">
+        <div class="right-nav-top">
+            <img src="img/LOGO.png" alt="Jsites Logo">
+            <p>JSITEs<br>Payment Management System</p>
+        </div>
+        <div>
+            <p>Options</p>
+        </div>
+        <div class="right-nav-bottom">
+            <a href="success.html"><img src="img/human.png" alt="Home">Home</a>
+            <a href="#home"><img src="img/human.png" alt="Add Student">Add Student Profile</a>
+            <a href="search_student.html"><img src="img/human.png" alt="Add Student">Search Student</a>
+            <a href="view.html"><img src="img/human.png" alt="View Details">View</a>
+        </div>
+    </div>
     <div class="container">
         <div id="search-title">
-            <h1>Search Student</h1>
+            <h1>SEARCH STUDENT</h1>
         </div>
         <div id="search-elements">
             <div id="search-container">
@@ -26,6 +48,7 @@
                         <tr>
                             <td>Student Name</td>
                             <td>Student ID</td>
+                            <td>Sem</td>
                             <td>Year</td>
                             <td>Section</td>
                             <td>Amount</td>
@@ -40,8 +63,86 @@
             </div>
         </div>
     </div>
-    
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const navToggle = document.getElementById('navToggle');
+            const rightNav = document.querySelector('.right-nav');
+            const rightNavTop = document.querySelector('.right-nav-top');
+
+            navToggle.addEventListener('click', function () {
+                rightNav.classList.toggle('show');
+            });
+
+            // Close the right navigation when clicking on an element inside .right-nav-top
+            rightNavTop.addEventListener('click', function () {
+                rightNav.classList.remove('show');
+            });
+
+            // Additional script to handle search functionality
+            const searchBtn = document.getElementById("searchBtn");
+            searchBtn.addEventListener("click", function () {
+                const studentId = document.getElementById("id_search").value;
+
+                if (studentId.trim() !== "") {
+                    // If student ID is provided, call the fetchData function
+                    fetchData(studentId);
+                } else {
+                    // If no student ID is provided, fetch all data
+                    fetchData();
+                }
+            });
+
+            // Function to fetch data from the API
+            function fetchData(studentId) {
+                // If studentId is not provided, set it to an empty string
+                studentId = studentId || "";
+
+                // Modify the fetch URL to match your API endpoint
+                fetch(`http://127.0.0.1/SIA-api-development/public/postretrieve?studentId=${studentId}`)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! Status: ${response.status}`);
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        if (data.status === "success") {
+                            displayData(data.data, studentId);
+                        } else {
+                            console.error(data.message);
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Error fetching data:", error);
+                    });
+            }
+
+            // Function to display data in the table
+            function displayData(data, searchId) {
+                const tbody = document.getElementById("data");
+                tbody.innerHTML = "";
+
+                data.forEach(student => {
+                    if (searchId === "" || student.studentId === searchId) {
+                        const row = document.createElement("tr");
+                        row.innerHTML = `
+                            <td>${student.studentname}</td>
+                            <td>${student.studentId}</td>
+                            <td>${student.sem}</td>
+                            <td>${student.year}</td>
+                            <td>${student.section}</td>
+                            <td>${student.amount}</td>
+                            <td>${student.date }</td>
+                            <td>${student.office_in_charge}</td>
+                            <td>${student.action}</td>
+                        `;
+                        tbody.appendChild(row);
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>

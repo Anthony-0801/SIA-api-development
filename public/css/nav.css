@@ -12,6 +12,15 @@ body {
     left: 0;
     overflow-x: hidden;
     box-shadow: 5px 0 5px -5px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center the content vertically */
+    transition: transform 0.3s ease-in-out; /* Add smooth transition for showing/hiding */
+    transform: translateX(-100%); /* Initially hide the menu off-screen */
+}
+
+.right-nav.show {
+    transform: translateX(0); /* Show the menu by moving it on-screen */
 }
 
 .right-nav p {
@@ -21,8 +30,8 @@ body {
 
 .right-nav-top {
     background-color: #26577C;
-    height: 25%;
-    padding: 0;
+    height: 15%;
+    padding: 35px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -46,7 +55,6 @@ body {
     padding: 0;
     font-family: sans-serif;
     font-weight: bold;
-    font-size: 90%;
 }
 
 .right-nav-bottom {
@@ -64,7 +72,6 @@ body {
     display: flex;
     align-items: center;
     transition-duration: 0.4s;
-    font-size: medium;
 }
 
 .right-nav-bottom img {
@@ -96,7 +103,7 @@ body {
     margin-top: 20px;
     width: 25px;
     height: 25px;
-    margin-left: 320px;
+    margin-left: 20px;
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
@@ -113,14 +120,20 @@ body {
 
 @media (max-width: 768px) {
     .right-nav {
-        display: none;
+        width: 100%;
     }
 
-    .content {
-        margin-left: 0;
+    .right-nav-bottom a {
+        padding: 15px 20px;
+        font-size: 16px;
     }
 
-    .top-nav {
-        margin-left: -300px;
+    .right-nav-bottom img {
+        height: 20px;
+        margin-right: 10px;
+    }
+
+    #navToggle img {
+        width: 25px;
     }
 }

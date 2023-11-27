@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 26, 2023 at 09:20 AM
+-- Generation Time: Nov 26, 2023 at 05:28 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -24,10 +24,10 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `payment`
+-- Table structure for table `student_profile`
 --
 
-CREATE TABLE `payment` (
+CREATE TABLE `student_profile` (
   `id` int(11) NOT NULL,
   `studentname` varchar(255) NOT NULL,
   `studentId` varchar(255) NOT NULL,
@@ -37,39 +37,17 @@ CREATE TABLE `payment` (
   `amount` int(11) NOT NULL,
   `date` date NOT NULL,
   `office_in_charge` varchar(255) NOT NULL,
-  `action` varchar(255) NOT NULL
+  `description` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `payment`
+-- Dumping data for table `student_profile`
 --
 
-INSERT INTO `payment` (`id`, `studentname`, `studentId`, `sem`, `section`, `year`, `amount`, `date`, `office_in_charge`, `action`) VALUES
-(1, 'Jaynard A. Raqueño', '201-1509-2', '1st', 'B', '2023', 500, '2023-11-27', 'Office A', 'Paid'),
-(2, 'Jaynard A. Raqueño', '201-1509-2', '1st', 'B', '2023', 500, '2023-11-27', 'Office A', 'Paid');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `registration`
---
-
-CREATE TABLE `registration` (
-  `id` int(11) NOT NULL,
-  `Studentname` varchar(100) NOT NULL,
-  `StudentId` varchar(100) NOT NULL,
-  `section` varchar(100) NOT NULL,
-  `year` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `registration`
---
-
-INSERT INTO `registration` (`id`, `Studentname`, `StudentId`, `section`, `year`) VALUES
-(1, 'Jaynard A Raqueno', '201-1509-2', 'B', '4th year'),
-(2, 'Jaynard A. Raqueño', '', 'B', '4th year'),
-(3, 'Jaynard A. Raqueño', '201-1509-2', 'B', '4th year');
+INSERT INTO `student_profile` (`id`, `studentname`, `studentId`, `sem`, `section`, `year`, `amount`, `date`, `office_in_charge`, `description`) VALUES
+(2, 'joe doe', '201-3241-2', '1st', 'B', '2023', 500, '2023-11-27', 'Office A', 'Paid'),
+(3, 'joe doe', '201-3241-2', '1st', 'B', '2023', 500, '2023-11-27', 'Office A', 'Paid'),
+(4, 'Jaynard A. Raqueño', '201-1509-2', '1st', 'B', '2023', 500, '2023-11-27', 'Office A', 'Paid');
 
 -- --------------------------------------------------------
 
@@ -96,15 +74,9 @@ INSERT INTO `users` (`user_id`, `role`, `Id_number`, `password`) VALUES
 --
 
 --
--- Indexes for table `payment`
+-- Indexes for table `student_profile`
 --
-ALTER TABLE `payment`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `registration`
---
-ALTER TABLE `registration`
+ALTER TABLE `student_profile`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -118,16 +90,10 @@ ALTER TABLE `users`
 --
 
 --
--- AUTO_INCREMENT for table `payment`
+-- AUTO_INCREMENT for table `student_profile`
 --
-ALTER TABLE `payment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `registration`
---
-ALTER TABLE `registration`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+ALTER TABLE `student_profile`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `users`

@@ -15,7 +15,7 @@
 
 <body>
     <div class="top-nav">
-        <button>
+        <button id="navToggle">
             <img src="img/three-lines.png" alt="Nav Button">
         </button>
     </div>
@@ -38,37 +38,86 @@
         <div id="search-title">
             <h1>VIEW INFORMATION</h1>
         </div>
-        <div class="cards">
-            <div class="cards-child">
-                <div class="cards-child-texts">
-                    <h2>500</h2>
-                    <p>TOTAL STUDENT</p>
-                </div>
-                <div><img src="img/human.png" alt=""></div>
-            </div>
-            <div class="cards-child">
-                <div class="cards-child-texts">
-                    <h2>₱12,500</h2>
-                    <p>FEES COLLECTION</p>
-                </div>
-                <div><img src="img/human.png" alt=""></div>
-            </div>
-            <div class="cards-child">
-                <div class="cards-child-texts">
-                    <h2>258</h2>
-                    <p>TOTAL PAID</p>
-                </div>
-                <div><img src="img/human.png" alt=""></div>
-            </div>
-            <div class="cards-child">
-                <div class="cards-child-texts">
-                    <h2>242</h2>
-                    <p>UNPAID</p>
-                </div>
-                <div><img src="img/human.png" alt=""></div>
-            </div>
+        <div class="cards" id="dashboardData">
+            <!-- Data will be dynamically populated here -->
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const navToggle = document.getElementById('navToggle');
+            const rightNav = document.querySelector('.right-nav');
+            const rightNavTop = document.querySelector('.right-nav-top');
+
+            navToggle.addEventListener('click', function () {
+                rightNav.classList.toggle('show');
+            });
+
+            // Close the right navigation when clicking on an element inside .right-nav-top
+            rightNavTop.addEventListener('click', function () {
+                rightNav.classList.remove('show');
+            });
+
+            // When the DOM is ready
+            $(document).ready(function () {
+                // Fetch data from the API
+                $.ajax({
+                    url: 'http://127.0.0.1/SIA-api-development/public/postView',
+                    method: 'GET',
+                    dataType: 'json',
+                    success: function (data) {
+                        // Update the content dynamically
+                        updateDashboard(data);
+                    },
+                    error: function (error) {
+                        console.error('Error fetching data:', error);
+                    }
+                });
+            });
+
+            // Function to update the dashboard content
+            function updateDashboard(data) {
+                // Ensure that the data is available and has the expected structure
+                if (data && data.status === 'success' && data.data) {
+                    var dashboardData = data.data;
+
+                    // Update the content dynamically
+                    $('#dashboardData').html(`
+                        <div class="cards-child">
+                            <div class="cards-child-texts">
+                                <h2>${dashboardData.totalStudents}</h2>
+                                <p>TOTAL STUDENT</p>
+                            </div>
+                            <div><img src="img/human.png" alt=""></div>
+                        </div>
+                        <div class="cards-child">
+                            <div class="cards-child-texts">
+                                <h2>₱${dashboardData.totalFeesCollected}</h2>
+                                <p>FEES COLLECTION</p>
+                            </div>
+                            <div><img src="img/human.png" alt=""></div>
+                        </div>
+                        <div class="cards-child">
+                            <div class="cards-child-texts">
+                                <h2>${dashboardData.totalPaid}</h2>
+                                <p>TOTAL PAID</p>
+                            </div>
+                            <div><img src="img/human.png" alt=""></div>
+                        </div>
+                        <div class="cards-child">
+                            <div class="cards-child-texts">
+                                <h2>${dashboardData.totalUnpaid}</h2>
+                                <p>UNPAID</p>
+                            </div>
+                            <div><img src="img/human.png" alt=""></div>
+                        </div>
+                    `);
+                } else {
+                    console.error('Invalid data structure:', data);
+                }
+            }
+        });
+    </script>
 </body>
 
 </html>

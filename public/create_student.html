@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSITEs Members</title>
+    <link rel="stylesheet" href="css/create_student.css">
+    <link rel="stylesheet" href="css/nav.css">
+    <link rel="icon" href="img/LOGO.png">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+
+<body>
+    <div class="top-nav">
+        <button id="navToggle">
+            <img src="img/three-lines.png" alt="Nav Button">
+        </button>
+    </div>
+    <div class="right-nav">
+        <div class="right-nav-top">
+            <img src="img/LOGO.png" alt="Jsites Logo">
+            <p>JSITEs<br>Payment Management System</p>
+        </div>
+        <div>
+            <p>Options</p>
+        </div>
+        <div class="right-nav-bottom">
+            <a href="view.html"><img src="img/human.png" alt="Home">Home</a>
+            <a href="create_student.html"><img src="img/human.png" alt="Add Student">Add Student Profile</a>
+            <a href="search_student.html"><img src="img/human.png" alt="Add Student">Search Student</a>
+        </div>
+    </div>
+    <div class="container">
+        <div id="search-title">
+            <h1>CREATE STUDENT PROFILE</h1>
+        </div>
+        <div class="search-elements">
+            <div class="insert-tab">
+                <div class="input-group">
+                    <label for="studentName">Student Name</label><br>
+                    <input type="text" id="studentName" name="studentName">
+                </div>
+
+                <div class="input-group">
+                    <label for="studentID">Student ID</label><br>
+                    <input type="text" id="studentID" name="studentID">
+                </div>
+
+                <div class="input-group">
+                    <label for="yearSection">Year and Section</label><br>
+                    <input type="text" id="yearSection" name="yearSection">
+                </div>
+            </div>
+
+            <div class="insert-tab">
+                <div class="input-group">
+                    <label for="amount">Amount</label><br>
+                    <input type="text" id="amount" name="amount">
+                </div>
+
+                <div class="input-group">
+                    <label for="date">Date</label><br>
+                    <input type="text" id="date" name="date">
+                </div>
+
+                <div class="input-group">
+                    <label for="officer">Officer in Charge</label><br>
+                    <input type="text" id="officer" name="officer">
+                </div>
+            </div>
+
+            <div class="insert-tab">
+                <div class="input-group">
+                    <label for="status">Status</label><br>
+                    <div class="radio-group">
+                        <input type="radio" id="paid" name="status" value="paid">
+                        <label for="paid">Paid</label>
+                        <br>
+                        <input type="radio" id="notPaid" name="status" value="notPaid">
+                        <label for="notPaid">Not Paid</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="insert-tab">
+                <div class="input-group" id="description">
+                    <label for="description">Description</label><br>
+                    <textarea id="description" name="description"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="save-cancel-button">
+            <button id="cancelButton">Cancel</button>
+            <button id="saveButton">Save</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const navToggle = document.getElementById('navToggle');
+            const rightNav = document.querySelector('.right-nav');
+            const rightNavTop = document.querySelector('.right-nav-top');
+
+            rightNav.classList.add('show');
+
+            navToggle.addEventListener('click', function () {
+                rightNav.classList.toggle('show');
+            });
+
+            rightNavTop.addEventListener('click', function () {
+                rightNav.classList.remove('show');
+            });
+        });
+    </script>
+</body>
+
+</html>

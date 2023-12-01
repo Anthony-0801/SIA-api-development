@@ -27,10 +27,9 @@
             <p>Options</p>
         </div>
         <div class="right-nav-bottom">
-            <a href="success.html"><img src="img/human.png" alt="Home">Home</a>
-            <a href="#home"><img src="img/human.png" alt="Add Student">Add Student Profile</a>
+            <a href="view.html"><img src="img/human.png" alt="Home">Home</a>
+            <a href="create_student.html"><img src="img/human.png" alt="Add Student">Add Student Profile</a>
             <a href="search_student.html"><img src="img/human.png" alt="Add Student">Search Student</a>
-            <a href="view.html"><img src="img/human.png" alt="View Details">View</a>
         </div>
     </div>
     <div class="container">
@@ -72,6 +71,8 @@
     const rightNav = document.querySelector('.right-nav');
     const rightNavTop = document.querySelector('.right-nav-top');
 
+    rightNav.classList.add('show');
+
     navToggle.addEventListener('click', function () {
         rightNav.classList.toggle('show');
     });
@@ -80,6 +81,7 @@
     rightNavTop.addEventListener('click', function () {
         rightNav.classList.remove('show');
     });
+
 
     // Additional script to handle search functionality
     const searchBtn = document.getElementById("searchBtn");

@@ -26,37 +26,36 @@
       </button>
     </div>
     <div class="right-nav">
-      <div class="right-nav-top">
-        <img src="img/LOGO.png" alt="Jsites Logo" />
-        <p>JSITEs<br />Payment Management System</p>
-      </div>
-      <div>
-        <p>Options</p>
-      </div>
-      <div class="right-nav-bottom">
-        <a href="view.html"><i class="fa-solid fa-house"></i> Home</a>
-        <a href="#home"
-          ><i class="fa-solid fa-user-group"></i> Add Student Profile</a
-        >
-        <a href="search_student.html"
-          ><i class="fa-solid fa-magnifying-glass"></i> Search Student</a
-        >
-      </div>
+        <div class="right-nav-top">
+            <img src="img/LOGO.png" alt="Jsites Logo">
+            <p>JSITEs<br>Payment Management System</p>
+        </div>
+        <div>
+            <p>Options</p>
+        </div>
+        <div class="right-nav-bottom">
+          <a href="view.html"><i class="fa-solid fa-house"></i> Home</a>
+          <a href="create_student.html"
+            ><i class="fa-solid fa-user-group"></i> Add Student Profile</a
+          >
+          <a href="search_student.html"
+            ><i class="fa-solid fa-magnifying-glass"></i> Search Student</a
+          >
+        </div>
     </div>
     <div class="container">
       <div id="search-title">
         <h1>VIEW INFORMATION</h1>
       </div>
       <div class="cards" id="dashboardData">
-        <!-- Data will be dynamically populated here -->
       </div>
     </div>
 
     <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const navToggle = document.getElementById("navToggle");
-        const rightNav = document.querySelector(".right-nav");
-        const rightNavTop = document.querySelector(".right-nav-top");
+        document.addEventListener('DOMContentLoaded', function () {
+            const navToggle = document.getElementById('navToggle');
+            const rightNav = document.querySelector('.right-nav');
+            const rightNavTop = document.querySelector('.right-nav-top');
 
         navToggle.addEventListener("click", function () {
           rightNav.classList.toggle("show");

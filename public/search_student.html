@@ -29,11 +29,10 @@
             <p>Options</p>
         </div>
         <div class="right-nav-bottom">
-                <a href="view.html"><i class="fa-solid fa-house"></i> Home</a>
-                <a href="#home"><i class="fa-solid fa-user-group"></i> Add Student Profile</a>
-                <a href="search_student.html"><i class="fa-solid fa-magnifying-glass"></i> Search Student</a>
-                
-            </div>
+            <a href="success.html"><img src="img/human.png" alt="Home">Home</a>
+            <a href="#home"><img src="img/human.png" alt="Add Student">Add Student Profile</a>
+            <a href="search_student.html"><img src="img/human.png" alt="Add Student">Search Student</a>
+            <a href="view.html"><img src="img/human.png" alt="View Details">View</a>
         </div>
     </div>
     <div class="container">
@@ -114,29 +113,33 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const navToggle = document.getElementById('navToggle');
-            const rightNav = document.querySelector('.right-nav');
-            const rightNavTop = document.querySelector('.right-nav-top');
+       document.addEventListener('DOMContentLoaded', function () {
+    const navToggle = document.getElementById('navToggle');
+    const rightNav = document.querySelector('.right-nav');
+    const rightNavTop = document.querySelector('.right-nav-top');
 
             navToggle.addEventListener('click', function () {
                 rightNav.classList.toggle('show');
             });
 
-            // Close the right navigation when clicking on an element inside .right-nav-top
-            rightNavTop.addEventListener('click', function () {
-                rightNav.classList.remove('show');
-            });
-            const searchBtn = document.getElementById("searchBtn");
-            const currentPageSpan = document.getElementById("currentPage");
+    // Close the right navigation when clicking on an element inside .right-nav-top
+    rightNavTop.addEventListener('click', function () {
+        rightNav.classList.remove('show');
+    });
 
-            let currentPage = 1;
-            let totalPages = 1;
+    // Additional script to handle search functionality
+    const searchBtn = document.getElementById("searchBtn");
+    searchBtn.addEventListener("click", function () {
+        const studentId = document.getElementById("id_search").value;
 
-            searchBtn.addEventListener("click", function () {
-                const studentId = document.getElementById("id_search").value.trim();
-                fetchData(studentId);
-            });
+        if (studentId.trim() !== "") {
+            // If student ID is provided, call the fetchData function
+            fetchData(studentId);
+        } else {
+            // If no student ID is provided, fetch all data
+            fetchData();
+        }
+    });
 
             function fetchData(studentId) {
                 studentId = studentId || "";

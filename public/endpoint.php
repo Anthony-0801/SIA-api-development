@@ -91,8 +91,13 @@ $app->get('/postretrieve', function (Request $request, Response $response, array
         return $response->withHeader('Content-Type', 'application/json')->withStatus(500);
     }
 
+    // Get pagination parameters from the request URL
+    $page = isset($_GET['page']) ? $_GET['page'] : 1;
+    $limit = isset($_GET['limit']) ? $_GET['limit'] : 25;  // Adjust the limit as needed
+    $offset = ($page - 1) * $limit;
+
     // No need to filter by studentId if it's not provided
-    $sql = "SELECT * FROM student_profile WHERE 1";
+    $sql = "SELECT * FROM student_profile LIMIT $limit OFFSET $offset";
 
     $result = $conn->query($sql);
 
@@ -121,12 +126,33 @@ $app->get('/postretrieve', function (Request $request, Response $response, array
         array_push($data, $rowData);
     }
 
-    $data_body = array("status" => "success", "data" => $data);
+    // Perform a separate count query
+    $countQuery = "SELECT COUNT(*) as total FROM student_profile";
+    $countResult = $conn->query($countQuery);
+
+    if ($countResult === false) {
+        $error = array("status" => "error", "message" => "Count query failed: " . $conn->error);
+        $response->getBody()->write(json_encode($error));
+        $conn->close();
+        return $response->withHeader('Content-Type', 'application/json')->withStatus(500);
+    }
+
+    // Fetch the total count
+    $totalCount = $countResult->fetch_assoc()['total'];
+
+    // Close the database connection
+    $conn->close();
+
+    // Prepare the response data
+    $data_body = array("status" => "success", "total" => $totalCount, "data" => $data);
+
+    // Write the response
     $response->getBody()->write(json_encode($data_body));
 
-    $conn->close();
-    return $response->withHeader('Content-Type', 'application/json');
+    // Set the response headers and status code
+    return $response->withHeader('Content-Type', 'application/json')->withStatus(200);
 });
+
 
 $app->get('/postView', function (Request $request, Response $response, array $args) {
     // Database
@@ -215,7 +241,7 @@ $app->post('/postUpdate', function (Request $request, Response $response, array 
 
 
 // Endpoint for Delete
-$app->post('/postDelete', function (Request $request, Response $response, array $args) {
+$app->delete('/postDelete', function (Request $request, Response $response, array $args) {
     $data = json_decode($request->getBody());
 
     // Validate and sanitize user inputs
@@ -303,15 +329,18 @@ $app->get('/posthistory', function (Request $request, Response $response, array 
         $data = array();
 
         while ($row = $result->fetch_assoc()) {
-            array_push($data, array(
-                "studentId" => $row["studentId"],
-                "section" => $row["section"],
-                "sem" => $row["sem"],
-                "year" => $row["year"],
-                "paymentamount" => $row["paymentamount"],
-                "paymentdate" => $row["paymentdate"],
-                "reference" => $row["reference"]
-            ));
+            array_push(
+                $data,
+                array(
+                    "studentId" => $row["studentId"],
+                    "section" => $row["section"],
+                    "sem" => $row["sem"],
+                    "year" => $row["year"],
+                    "paymentamount" => $row["paymentamount"],
+                    "paymentdate" => $row["paymentdate"],
+                    "reference" => $row["reference"]
+                )
+            );
         }
 
         $data_body = array("status" => "success", "data" => $data);

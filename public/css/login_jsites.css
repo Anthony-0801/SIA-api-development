@@ -1,3 +1,9 @@
+/* * {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+} */
+
 body {
   background-image: url(bg.png);
   margin: 0;
@@ -19,17 +25,29 @@ body {
   margin-left: 10px;
 }
 
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-left: 53%;
+}
+
+.hero-text {
+  margin: 0;
+}
+
 form {
   height: 21.875em;
   width: 28.125em;
   background-color: #fff;
   padding: 10px 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   border-radius: 10px;
   box-shadow: -3px 3px 10px rgba(0, 0, 0, 0.4);
-  margin-left: 53%;
+  display: flex;
+  display: column;
+  justify-content: center;
+  flex-direction: column;
 }
 
 h1 {

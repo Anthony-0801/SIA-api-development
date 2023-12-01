@@ -40,6 +40,25 @@
     height: 75px;
     
 }
+.right-nav-bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.right-nav-bottom a {
+    text-decoration: none;
+    color: #333; /* Adjust the color as needed */
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+}
+
+.right-nav-bottom i {
+    margin-right: 8px;
+    font-size: 18px; /* Adjust the font size as needed */
+}
+
 
 /* Media Query for smaller screens */
 @media screen and (max-width: 600px) {

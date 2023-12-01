@@ -20,8 +20,8 @@ body {
 }
 
 form {
-  height: 350px;
-  width: 450px;
+  height: 21.875em;
+  width: 28.125em;
   background-color: #fff;
   padding: 10px 20px;
   display: flex;

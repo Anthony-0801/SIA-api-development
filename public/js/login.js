@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
       passwordInput.value === correctPassword
     ) {
       // Redirect to success.html
-      window.location.href = "nav.html";
+      window.location.href = "view.html";
     } else {
       // Display an error message or handle incorrect credentials as needed
       alert("Incorrect username or password. Please try again.");

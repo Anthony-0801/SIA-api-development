@@ -80,7 +80,6 @@
     margin-left: 650px;
 }
 
-/* Styles for search */
 #search-container {
     display: flex;
     align-items: stretch;
@@ -120,7 +119,6 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
-/* Styles for update */
 #update-container {
     display: flex;
     align-items: stretch;

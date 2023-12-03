@@ -29,11 +29,14 @@
             <p>Options</p>
         </div>
         <div class="right-nav-bottom">
-            <a href="success.html"><img src="img/human.png" alt="Home">Home</a>
-            <a href="#home"><img src="img/human.png" alt="Add Student">Add Student Profile</a>
-            <a href="search_student.html"><img src="img/human.png" alt="Add Student">Search Student</a>
-            <a href="view.html"><img src="img/human.png" alt="View Details">View</a>
-        </div>
+            <a href="view.html"><i class="fa-solid fa-house"></i> Home</a>
+            <a href="create_student.html"
+              ><i class="fa-solid fa-user-group"></i> Add Student Profile</a
+            >
+            <a href="search_student.html"
+              ><i class="fa-solid fa-magnifying-glass"></i> Search Student</a
+            >
+          </div>
     </div>
     <div class="container">
         <div id="search-title">
@@ -118,9 +121,11 @@
     const rightNav = document.querySelector('.right-nav');
     const rightNavTop = document.querySelector('.right-nav-top');
 
-            navToggle.addEventListener('click', function () {
-                rightNav.classList.toggle('show');
-            });
+    rightNav.classList.add('show');
+
+    navToggle.addEventListener('click', function () {
+        rightNav.classList.toggle('show');
+    });
 
     // Close the right navigation when clicking on an element inside .right-nav-top
     rightNavTop.addEventListener('click', function () {

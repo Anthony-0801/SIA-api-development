@@ -43,20 +43,29 @@
 .right-nav-bottom {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: left;
+    font-family: sans-serif;
+    width: 300px;
 }
 
 .right-nav-bottom a {
     text-decoration: none;
-    color: #333; /* Adjust the color as needed */
-    margin: 10px 0;
+    color: #333; 
     display: flex;
+    padding-left: 50px;
+    height: 40px;
     align-items: center;
+    transition-duration: 0.3s;
+}
+
+.right-nav-bottom a:hover{
+    background-color: grey;
+    color: white;
 }
 
 .right-nav-bottom i {
     margin-right: 8px;
-    font-size: 18px; /* Adjust the font size as needed */
+    font-size: 18px; 
 }
 
 

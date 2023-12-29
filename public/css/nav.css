@@ -138,3 +138,11 @@ body {
         width: 25px;
     }
 }
+.logout {
+    position: absolute;
+    bottom: 10px;
+    left: 120px;
+  }
+  .logout:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  }

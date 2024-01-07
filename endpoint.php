@@ -33,10 +33,10 @@ $app->post('/postAdding', function ($request, $response, $args) {
     $description = filter_var($data->description, FILTER_SANITIZE_STRING);
 
     // Database
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "db_jsites";
+     $servername = "srv443.hstgr.io";
+    $username = "u475920781_jspaysite";
+    $password = "jspaysite4321A";
+    $dbname = "u475920781_jspaysite";
 
     try {
         $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
@@ -76,10 +76,10 @@ $app->post('/postAdding', function ($request, $response, $args) {
 //endpoint for retrieval
 $app->get('/postretrieve', function (Request $request, Response $response, array $args) {
     // Database
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "db_jsites";
+     $servername = "srv443.hstgr.io";
+    $username = "u475920781_jspaysite";
+    $password = "jspaysite4321A";
+    $dbname = "u475920781_jspaysite";
 
     // Create connection
     $conn = new mysqli($servername, $username, $password, $dbname);
@@ -156,10 +156,10 @@ $app->get('/postretrieve', function (Request $request, Response $response, array
 
 $app->get('/postView', function (Request $request, Response $response, array $args) {
     // Database
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "db_jsites";
+     $servername = "srv443.hstgr.io";
+    $username = "u475920781_jspaysite";
+    $password = "jspaysite4321A";
+    $dbname = "u475920781_jspaysite";
 
     // Create connection
     $conn = new mysqli($servername, $username, $password, $dbname);
@@ -214,10 +214,10 @@ $app->post('/postUpdate', function (Request $request, Response $response, array 
     $description = filter_var($data->description, FILTER_SANITIZE_STRING);
 
     // Database
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "db_jsites";
+     $servername = "srv443.hstgr.io";
+    $username = "u475920781_jspaysite";
+    $password = "jspaysite4321A";
+    $dbname = "u475920781_jspaysite";
 
     try {
         $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
@@ -248,10 +248,10 @@ $app->delete('/postDelete', function (Request $request, Response $response, arra
     $studentId = filter_var($data->studentId, FILTER_SANITIZE_STRING);
 
     // Database
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "db_jsites";
+     $servername = "srv443.hstgr.io";
+    $username = "u475920781_jspaysite";
+    $password = "jspaysite4321A";
+    $dbname = "u475920781_jspaysite";
 
     try {
         $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
@@ -276,10 +276,10 @@ $app->delete('/postDelete', function (Request $request, Response $response, arra
 //endpoint for history
 $app->get('/posthistory', function (Request $request, Response $response, array $args) {
     // Database
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "db_jsites";
+     $servername = "srv443.hstgr.io";
+    $username = "u475920781_jspaysite";
+    $password = "jspaysite4321A";
+    $dbname = "u475920781_jspaysite";
 
     // Create connection
     $conn = new mysqli($servername, $username, $password, $dbname);

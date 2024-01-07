@@ -165,7 +165,7 @@
     
             function fetchData(studentId) {
                 studentId = studentId || "";
-                fetch(`http://127.0.0.1/SIA-api-development/public/postretrieve?studentId=${studentId}&page=${currentPage}&limit=25`)
+                fetch(`https://jspaysite.fusiontechph.com/postretrieve?studentId=${studentId}&page=${currentPage}&limit=25`)
                     .then(response => {
                         if (!response.ok) {
                             throw new Error(`HTTP error! Status: ${response.status}`);
@@ -233,7 +233,7 @@
     
                 if (isConfirmed) {
                     // Send a DELETE request to the '/postDelete' endpoint
-                    fetch('http://127.0.0.1/SIA-api-development/public//postDelete', {
+                    fetch('https://jspaysite.fusiontechph.com/postDelete', {
                         method: 'DELETE',
                         headers: {
                             'Content-Type': 'application/json'
@@ -321,7 +321,7 @@
     };
 
     // Send the update request to the server
-    fetch('http://127.0.0.1/SIA-api-development/public/postUpdate', {
+    fetch('https://jspaysite.fusiontechph.com/postUpdate', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

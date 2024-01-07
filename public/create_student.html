@@ -60,30 +60,6 @@
                         <label for="studentID">Student ID</label><br>
                         <input type="text" id="studentID" name="studentId"  required>
                     </div>
-            
-
-                    <div class="input-group">
-                        <label for="sem">Sem</label><br>
-                        <input type="text" id="sem" name="sem"  required>
-                    </div>
-
-                    <div class="input-group">
-                        <label for="year">Year level</label><br>
-                        <input type="text" id="year" name="year"  required>
-                    </div>
-                
-                </div>
-
-                <div class="insert-tab">
-                    <div class="input-group">
-                        <label for="section">Section</label><br>
-                        <input type="text" id="section" name="section"  required>
-                    </div>
-                    <div class="input-group">
-                        <label for="amount">Amount</label><br>
-                        <input type="text" id="amount" name="amount"  required>
-                    </div>
-
                     <div class="input-group">
                         <label for="date">Date</label><br>
                         <input type="date" id="date" name="date"  required>
@@ -93,11 +69,58 @@
                         <label for="officer">Officer in Charge</label><br>
                         <input type="text" id="office_in_charge" name="office_in_charge"  required>
                     </div>
+
+                   
                 
-                    <!-- <div class="input-group" id="description">
-                        <label for="description">Description</label><br>
-                        <textarea id="description" name="description"></textarea>
-                    </div> -->
+                </div>
+
+                <div class="insert-tab">
+                    <div class="input-group">
+                        <label for="sem">Sem</label><br>
+                        <select id="sem" name="sem" required>
+                            <option value="" selected disabled>- -select- -</option>
+                            <option value="1st">1st</option>
+                            <option value="2nd">2nd</option>
+                        </select>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="year">Year level</label><br>
+                        <select id="year" name="year" required>
+                            <option value="" selected disabled>- -select- -</option>
+                            <option value="1">First Year</option>
+                            <option value="2">Second Year</option>
+                            <option value="3">Third Year</option>
+                            <option value="4">Fourth Year</option>
+                        </select>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="section">Section</label><br>
+                        <select id="section" name="section" required>
+                            <option value="" selected disabled>- -select- -</option>
+                            <option value="A">Section A</option>
+                            <option value="B">Section B</option>
+                            <option value="C">Section C</option>
+                            <option value="D">Section D</option>
+                            <option value="E">Section E</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="description">Select Status:</label><br>
+                        <select id="description" name="descriptions"  required>
+                        <option value="" selected disabled>- -select- -</option>
+                        <option value="paid">Paid</option>
+                        <option value="not paid">Not Paid</option>
+                        </select>
+                    </div>
+                    <div class="input-group" style="  display: none;">
+                        <label for="amount">Amount</label><br>
+                        <select id="amount" name="amount" required>
+                            <option value="25" selected>25</option>
+                          
+                        </select>
+                    </div>
                 </div>
 
                 <div class="insert-tab">
@@ -111,14 +134,7 @@
                             <label for="notPaid">Not Paid</label>
                         </div>
                     </div> -->
-                    <div class="input-group">
-                        <label for="description">Select Status:</label>
-                        <select id="description" name="descriptions"  required>
-                        <option value="" selected disabled>--select--</option>
-                        <option value="paid">Paid</option>
-                        <option value="not paid">Not Paid</option>
-                        </select>
-                    </div>
+                    
                 </div>
 
                 

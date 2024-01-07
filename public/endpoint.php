@@ -174,9 +174,9 @@ $app->get('/postView', function (Request $request, Response $response, array $ar
     // Query to get dashboard data
     $dashboardQuery = "SELECT 
                             COUNT(*) as totalStudents, 
-                            SUM(amount) as totalFeesCollected,
-                            SUM(CASE WHEN amount > 0 THEN 1 ELSE 0 END) as totalPaid,
-                            SUM(CASE WHEN amount = 0 THEN 1 ELSE 0 END) as totalUnpaid
+                            SUM(CASE WHEN description = 'paid' THEN amount ELSE 0 END) as totalFeesCollected,
+                            SUM(CASE WHEN description = 'paid' THEN 1 ELSE 0 END) as totalPaid,
+                            SUM(CASE WHEN description = 'not paid' THEN 1 ELSE 0 END) as totalUnpaid
                         FROM student_profile";
 
     $result = $conn->query($dashboardQuery);

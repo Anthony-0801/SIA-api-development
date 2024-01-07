@@ -20,19 +20,20 @@ $(document).ready(function(){
             contentType: 'application/json',
             data: JSON.stringify(formData),
             success: function(response){
-                alert('Data sent successfully');
-                
+                alert('Data entered successfully');
+                // Optionally, you can also check the response for more details
+                console.log(response);
+                location.reload();
             },
             error: function(error){
                 console.log(error);
             }
         });
-        location.reload();
     });
     
 });
 
 function refreshPage() {
-    location.reload(true); // true forces a reload from the server, you can use false to reload from cache
+    location.reload(true);
     event.preventDefault();
-  }
+}

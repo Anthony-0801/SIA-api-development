@@ -37,22 +37,21 @@
     font-size: 10px;
 }
 
-/* .input-group #description{
-    font-family: sans-serif;
-    color: #7F7F7F;
-    font-size: small;
-    border-radius: 5px;
-    width: 80%;
-    height: 25px;
-    
-} */
-
 #description label{
     margin-bottom: 13px;
     font-family: sans-serif;
     color: #7F7F7F;
     font-size: small;
 }
+
+.input-group select {
+    border-radius: 5px;
+    border: solid #7F7F7F 1px;
+    width: 80%;
+    height: 28.5px;
+    font-size: 15px;
+}
+
 
 .input-group input{
     border-radius: 5px;

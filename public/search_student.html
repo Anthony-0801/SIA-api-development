@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JSITEs Members</title>
-    <link rel="stylesheet" href="css/search_student.css">
+    <link rel="stylesheet" href="css/search_studentt.css">
     <link rel="stylesheet" href="css/nav.css">
     <link rel="icon" href="img/LOGO.png">
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
@@ -47,6 +47,7 @@
         </div>
         <div id="search-elements">
             <div id="search-container">
+                <button onclick="printSummary()">PRINT SUMMARY</button>
                 <input type="text" id="id_search" value="" placeholder="Enter Student ID">&nbsp;
                 <input type="button" id="searchBtn" value="SEARCH">
             </div>
@@ -120,15 +121,39 @@
             <option value="not paid">Not Paid</option>
             </select>
 
-           
-            <button class="update-button" onclick="updateStudent()" id="updateButton">Update</button>
-
-
+            <div>
+                <button class="update-button" onclick="updateStudent()" id="updateButton">Update</button>
+            </div>
         </div>
     </div>
 
     <script>
-       let totalPages;
+        function printSummary() {
+            fetch('http://127.0.0.1/SIA-api-development/public/printSummary', {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.blob();
+            })
+            .then(blob => {
+                const pdfUrl = URL.createObjectURL(blob);
+    
+                window.open(pdfUrl, '_blank');
+            })
+            .catch(error => {
+                console.error('Error printing summary:', error);
+            });
+        }
+    </script>
+
+    <script>
+        let totalPages;
         const currentPageSpan = document.getElementById("currentPage");
         let currentPage = 1;
         let updateButton;

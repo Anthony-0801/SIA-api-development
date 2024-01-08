@@ -26,10 +26,9 @@
 #search-container {
     display: flex;
     height: 35px;
-    margin-left: 650px;
+    margin-left: 0;
 }
 
-/* Styles for search */
 #search-container {
     display: flex;
     align-items: stretch;
@@ -42,10 +41,32 @@
     border: 2px solid #7F7F7F;
     border-radius: 20px 0 0 20px;
     box-sizing: border-box;
+    margin-left: 450px;
+}
+
+#search-container button {
+    flex: 0; 
+    padding: 10px 15px;
+    font-size: 16px;
+    background-color: #26577C;
+    color: #fff;
+    border: none;
+    border-radius: 20px 0 0 20px;
+    cursor: pointer;
+    transition:0.3s ease;
+    min-width: 170px;
+    transition-duration: 0.3s;
+    height: 35px;
+    border-radius: 5px;
+    margin-right: 150px;
+}
+
+#search-container button:hover {
+    background-color: #E55604; 
 }
 
 #searchBtn {
-    flex: 0; /* Make sure the button doesn't grow */
+    flex: 0; 
     padding: 10px 15px;
     font-size: 16px;
     background-color: #26577C;
@@ -53,7 +74,7 @@
     border: none;
     border-radius: 0 20px 20px 0;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: 0.3s ease;
     width: 100px;
     transition-duration: 0.3s;
 }
@@ -62,7 +83,6 @@
     background-color: #E55604;
 }
 
-/* Styles for update */
 #update-container {
     display: flex;
     align-items: stretch;
@@ -78,7 +98,7 @@
 }
 
 #UpdateBtn {
-    flex: 0; /* Make sure the button doesn't grow */
+    flex: 0; 
     padding: 10px 15px;
     font-size: 16px;
     background-color: #26577C;
@@ -159,16 +179,40 @@ nav {
 }
 
 #pagination {
-    margin-top: 20px;
     text-align: center;
+    margin-top: 20px;
+    margin-left: 300px;
 }
 
 #prevPage,
 #nextPage {
-    padding: 5px 10px;
-    margin: 0 5px;
+    background-color: #26577C;
+    color: white;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
     cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    transition-duration: 0.3s;
+    width: 100px;
 }
+
+#prevPage:hover,
+#nextPage:hover {
+    background-color: #E55604; 
+}
+
+#currentPage {
+    display: inline-block;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-family: sans-serif;
+}
+
 .action-column {
 display: flex;
 justify-content: space-between;
@@ -213,6 +257,7 @@ background-color: transparent;
     height: 100%;
     overflow: auto;
     background-color: rgba(0, 0, 0, 0.5);
+    font-family: sans-serif;
 }
 
 .modal-content {
@@ -221,6 +266,7 @@ background-color: transparent;
     padding: 20px;
     border: 1px solid #888;
     width: 50%;
+    border-radius: 10px;
 }
 
 .close {
@@ -251,15 +297,37 @@ background-color: transparent;
     padding: 8px;
     margin-bottom: 10px;
     box-sizing: border-box;
+    border: solid 1px;
+    border-radius: 5px;
+    font-size: 15px;   
+}
+
+.modal-content select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    border: solid 1px;
+    border-radius: 5px;
+    font-size: 15px;   
 }
 
 .modal-content button {
-    background-color: #4CAF50;
+    background-color: #26577C;
     color: white;
     padding: 10px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    transition-duration: 0.3s;
+    margin-top: 20px;
+    font-size: 17px;
+    margin-left: 285px;
+    width: 200px;
+}
+
+.modal-content button:hover {
+    background-color: #E55604; 
 }
 
 .right-nav-bottom {

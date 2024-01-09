@@ -36,6 +36,6 @@ The malfunctioning notification when storing student profiles can be fixed by th
 2. Modify the CSS for the update.
 3. Replace the icon on the dashboard with something more relevant.
 4. Removing the option from the right navigation; it might be better without it.
-5. 
+
 
 

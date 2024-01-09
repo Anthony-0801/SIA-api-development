@@ -1,197 +1,239 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>JSITEs Members</title>
-    <link rel="stylesheet" href="css/search_student.css">
-    <link rel="stylesheet" href="css/nav.css">
-    <link rel="icon" href="img/LOGO.png">
+    <link rel="stylesheet" href="css/search_studentt.css" />
+    <link rel="stylesheet" href="css/nav.css" />
+    <link rel="icon" href="img/LOGO.png" />
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script type="text/javascript" src="js/script.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-</head>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
 
-<body>
+  <body>
     <div class="top-nav">
-        <button id="navToggle">
-            <img src="img/three-lines.png" alt="Nav Button">
-        </button>
+      <button id="navToggle">
+        <img src="img/three-lines.png" alt="Nav Button" />
+      </button>
     </div>
     <div class="right-nav">
-        <div class="right-nav-top">
-            <img src="img/LOGO.png" alt="Jsites Logo">
-            <p>JSITEs<br>Payment Management System</p>
-        </div>
-        <div>
-            <p>Options</p>
-        </div>
-        <div class="right-nav-bottom">
-            <a href="view.html"><i class="fa-solid fa-house"></i> Home</a>
-            <a href="create_student.html"
-              ><i class="fa-solid fa-user-group"></i> Add Student Profile</a
-            >
-            <a href="search_student.html"
-              ><i class="fa-solid fa-magnifying-glass"></i> Search Student</a
-            >
-          </div>
-          <div class="logout">
-            <a href="index.html" style="text-decoration: none; color: inherit;">Logout</a>
-          </div>
+      <div class="right-nav-top">
+        <img src="img/LOGO.png" alt="Jsites Logo" />
+        <p>JSITEs<br />Payment Management System</p>
+      </div>
+      <div>
+        <p>Options</p>
+      </div>
+      <div class="right-nav-bottom">
+        <a href="view.html"><i class="fa-solid fa-house"></i> Home</a>
+        <a href="create_student.html"
+          ><i class="fa-solid fa-user-group"></i> Add Student Profile</a
+        >
+        <a href="search_student.html"
+          ><i class="fa-solid fa-magnifying-glass"></i> Search Student</a
+        >
+      </div>
+      <div class="logout">
+        <a href="index.html" style="text-decoration: none; color: inherit"
+          >Logout</a
+        >
+      </div>
     </div>
     <div class="container">
-        <div id="search-title">
-            <h1>SEARCH STUDENT</h1>
+      <div id="search-title">
+        <h1>SEARCH STUDENT</h1>
+      </div>
+      <div id="search-elements">
+        <div id="search-container">
+          <button onclick="printSummary()">PRINT SUMMARY</button>
+          <input
+            type="text"
+            id="id_search"
+            value=""
+            placeholder="Enter Student ID"
+          />&nbsp;
+          <input type="button" id="searchBtn" value="SEARCH" />
         </div>
-        <div id="search-elements">
-            <div id="search-container">
-                <input type="text" id="id_search" value="" placeholder="Enter Student ID">&nbsp;
-                <input type="button" id="searchBtn" value="SEARCH">
-            </div>
 
-            <div class="container-table">
-                <table >
-                    <thead>
-                        <tr>
-                            <td>No.</td>
-                            <td>Student Name</td>
-                            <td>Student ID</td>
-                            <td>Sem</td>
-                            <td>Year level</td>
-                            <td>Section</td>
-                            <td>Amount</td>
-                            <td>Date</td>
-                            <td>Officer-in-charge</td>
-                            <td>Status</td>
-                            <td>Action</td>
-                        </tr>
-                    </thead>
-                    <tbody id="data">
-                    </tbody>
-                </table>
-            </div>
+        <div class="container-table">
+          <table>
+            <thead>
+              <tr>
+                <td>No.</td>
+                <td>Student Name</td>
+                <td>Student ID</td>
+                <td>Sem</td>
+                <td>Year level</td>
+                <td>Section</td>
+                <td>Amount</td>
+                <td>Date</td>
+                <td>Officer-in-charge</td>
+                <td>Status</td>
+                <td>Action</td>
+              </tr>
+            </thead>
+            <tbody id="data"></tbody>
+          </table>
         </div>
+      </div>
     </div>
 
     <div id="pagination">
-        <button id="prevPage" onclick="changePage(-1)">Previous</button>
-        <span id="currentPage"></span>
-        <button id="nextPage" onclick="changePage(1)">Next</button>
+      <button id="prevPage" onclick="changePage(-1)">Previous</button>
+      <span id="currentPage"></span>
+      <button id="nextPage" onclick="changePage(1)">Next</button>
     </div>
     <div id="updateModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeUpdateModal()">&times;</span>
+      <div class="modal-content">
+        <span class="close" onclick="closeUpdateModal()">&times;</span>
 
-            <!-- Update form or content goes here -->
-            <h2>Update Student Information</h2>
+        <!-- Update form or content goes here -->
+        <h2>Update Student Information</h2>
 
-            <!-- Student Details -->
-            <label for="updateName">Student Name:</label>
-            <input type="text" id="updateName">
+        <!-- Student Details -->
+        <label for="updateName">Student Name:</label>
+        <input type="text" id="updateName" />
 
-            <label for="updateStudentId">Student ID:</label>
-            <input type="text" id="updateStudentId">
+        <label for="updateStudentId">Student ID:</label>
+        <input type="text" id="updateStudentId" />
 
-            <label for="updateSem">Sem:</label>
-            <input type="text" id="updateSem">
+        <label for="updateSem">Sem:</label>
+        <input type="text" id="updateSem" />
 
-            <label for="updateYear">Year level:</label>
-            <input type="text" id="updateYear">
+        <label for="updateYear">Year level:</label>
+        <input type="text" id="updateYear" />
 
-            <label for="updateSection">Section:</label>
-            <input type="text" id="updateSection">
+        <label for="updateSection">Section:</label>
+        <input type="text" id="updateSection" />
 
-            <label for="updateAmount">Amount:</label>
-            <input type="text" id="updateAmount">
+        <label for="updateAmount">Amount:</label>
+        <input type="text" id="updateAmount" />
 
-            <label for="updateDate">Date:</label>
-            <input type="text" id="updateDate">
+        <label for="updateDate">Date:</label>
+        <input type="text" id="updateDate" />
 
-            <label for="updateOfficeInCharge">Officer-in-charge:</label>
-            <input type="text" id="updateOfficeInCharge">
+        <label for="updateOfficeInCharge">Officer-in-charge:</label>
+        <input type="text" id="updateOfficeInCharge" />
 
-            
-            <label for="updateDescription">Select Status:</label>
-            <select id="updateDescription" name="descriptions" >
-            <option value="" selected disabled>--select--</option>
-            <option value="paid">Paid</option>
-            <option value="not paid">Not Paid</option>
-            </select>
+        <label for="updateDescription">Select Status:</label>
+        <select id="updateDescription" name="descriptions">
+          <option value="" selected disabled>--select--</option>
+          <option value="paid">Paid</option>
+          <option value="not paid">Not Paid</option>
+        </select>
 
-           
-            <button class="update-button" onclick="updateStudent()" id="updateButton">Update</button>
-
-
+        <div>
+          <button
+            class="update-button"
+            onclick="updateStudent()"
+            id="updateButton"
+          >
+            Update
+          </button>
         </div>
+      </div>
     </div>
 
     <script>
-       let totalPages;
-        const currentPageSpan = document.getElementById("currentPage");
-        let currentPage = 1;
-        let updateButton;
-
-        document.addEventListener('DOMContentLoaded', function () {
-            const navToggle = document.getElementById('navToggle');
-            const rightNav = document.querySelector('.right-nav');
-            const rightNavTop = document.querySelector('.right-nav-top');
-    
-            rightNav.classList.add('show');
-    
-            navToggle.addEventListener('click', function () {
-                rightNav.classList.toggle('show');
-            });
-    
-            // Close the right navigation when clicking on an element inside .right-nav-top
-            rightNavTop.addEventListener('click', function () {
-                rightNav.classList.remove('show');
-            });
-    
-            // Additional script to handle search functionality
-            const searchBtn = document.getElementById("searchBtn");
-            searchBtn.addEventListener("click", function () {
-                const studentId = document.getElementById("id_search").value;
-    
-                if (studentId.trim() !== "") {
-                    // If student ID is provided, call the fetchData function
-                    fetchData(studentId);
-                } else {
-                    // If no student ID is provided, fetch all data
-                    fetchData();
-                }
-            });
-    
-            function fetchData(studentId) {
-                studentId = studentId || "";
-                fetch(`https://jspaysite.fusiontechph.com/public/postretrieve?studentId=${studentId}&page=${currentPage}&limit=25`)
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error(`HTTP error! Status: ${response.status}`);
-                        }
-                        return response.json();
-                    })
-                    .then(data => {
-                        totalPages = Math.ceil(data.total / 25);
-                        displayData(data.data, studentId);
-                        updatePaginationControls();
-                    })
-                    .catch(error => {
-                        console.error("Error fetching data:", error);
-                    });
+      function printSummary() {
+        fetch("https://jspaysite.fusiontechph.com/public/printSummary", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error(`HTTP error! Status: ${response.status}`);
             }
-    
-            function displayData(data, searchId) {
-                const tbody = document.getElementById("data");
-                tbody.innerHTML = "";
-    
-                let rowNumber = (currentPage - 1) * 25 + 1; // Initialize row number based on current page
-    
-                data.forEach(student => {
-                    if (searchId === "" || student.studentId === searchId) {
-                        const row = document.createElement("tr");
-                        row.innerHTML = `
+            return response.blob();
+          })
+          .then((blob) => {
+            const pdfUrl = URL.createObjectURL(blob);
+
+            window.open(pdfUrl, "_blank");
+          })
+          .catch((error) => {
+            console.error("Error printing summary:", error);
+          });
+      }
+    </script>
+
+    <script>
+      let totalPages;
+      const currentPageSpan = document.getElementById("currentPage");
+      let currentPage = 1;
+      let updateButton;
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const navToggle = document.getElementById("navToggle");
+        const rightNav = document.querySelector(".right-nav");
+        const rightNavTop = document.querySelector(".right-nav-top");
+
+        rightNav.classList.add("show");
+
+        navToggle.addEventListener("click", function () {
+          rightNav.classList.toggle("show");
+        });
+
+        // Close the right navigation when clicking on an element inside .right-nav-top
+        rightNavTop.addEventListener("click", function () {
+          rightNav.classList.remove("show");
+        });
+
+        // Additional script to handle search functionality
+        const searchBtn = document.getElementById("searchBtn");
+        searchBtn.addEventListener("click", function () {
+          const studentId = document.getElementById("id_search").value;
+
+          if (studentId.trim() !== "") {
+            // If student ID is provided, call the fetchData function
+            fetchData(studentId);
+          } else {
+            // If no student ID is provided, fetch all data
+            fetchData();
+          }
+        });
+
+        function fetchData(studentId) {
+          studentId = studentId || "";
+          fetch(
+            `https://jspaysite.fusiontechph.com/public/postretrieve?studentId=${studentId}&page=${currentPage}&limit=25`
+          )
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+              }
+              return response.json();
+            })
+            .then((data) => {
+              totalPages = Math.ceil(data.total / 25);
+              displayData(data.data, studentId);
+              updatePaginationControls();
+            })
+            .catch((error) => {
+              console.error("Error fetching data:", error);
+            });
+        }
+
+        function displayData(data, searchId) {
+          const tbody = document.getElementById("data");
+          tbody.innerHTML = "";
+
+          let rowNumber = (currentPage - 1) * 25 + 1; // Initialize row number based on current page
+
+          data.forEach((student) => {
+            if (searchId === "" || student.studentId === searchId) {
+              const row = document.createElement("tr");
+              row.innerHTML = `
                             <td>${rowNumber}</td>
                             <td>${student.studentname}</td>
                             <td>${student.studentId}</td>
@@ -220,161 +262,177 @@
                                     <i class="fa-solid fa-trash"></i> Delete
                                 </button>
                             </td>`;
-                        tbody.appendChild(row);
-    
-                        rowNumber++;
-                    }
-                });
+              tbody.appendChild(row);
+
+              rowNumber++;
             }
-    
-            window.deleteStudent = function (studentId) {
-                // Display a confirmation dialog
-                const isConfirmed = confirm("Are you sure you want to delete this student?");
-    
-                if (isConfirmed) {
-                    // Send a DELETE request to the '/postDelete' endpoint
-                    fetch('https://jspaysite.fusiontechph.com/public/postDelete', {
-                        method: 'DELETE',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            studentId: studentId
-                        })
-                    })
-                        .then(response => response.json())
-                        .then(data => {
-                            if (data.status === 'success') {
-                                console.log("Student with ID:", studentId, "deleted successfully.");
-                                location.reload();
-                            } else {
-                                console.error("Failed to delete student with ID:", studentId, ", error:", data.message);
-                            }
-                        });
+          });
+        }
+
+        window.deleteStudent = function (studentId) {
+          // Display a confirmation dialog
+          const isConfirmed = confirm(
+            "Are you sure you want to delete this student?"
+          );
+
+          if (isConfirmed) {
+            // Send a DELETE request to the '/postDelete' endpoint
+            fetch("https://jspaysite.fusiontechph.com/public/postDelete", {
+              method: "DELETE",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                studentId: studentId,
+              }),
+            })
+              .then((response) => response.json())
+              .then((data) => {
+                if (data.status === "success") {
+                  console.log(
+                    "Student with ID:",
+                    studentId,
+                    "deleted successfully."
+                  );
+                  location.reload();
                 } else {
-                    console.log("Deletion canceled.");
+                  console.error(
+                    "Failed to delete student with ID:",
+                    studentId,
+                    ", error:",
+                    data.message
+                  );
                 }
-            };
-    
-            window.openUpdateModal = function (button) {
-                console.log("Opening update modal for student ID:", button.dataset.studentId);
-                const updateModal = document.getElementById("updateModal");
-                updateModal.style.display = "block";
-    
-                // Store the clicked update button globally
-                updateButton = button;
-    
-                // Extract data from the button's dataset attribute
-                const studentId = button.dataset.studentId || "";
-                const studentName = button.dataset.studentName || "";
-                const sem = button.dataset.sem || "";
-                const year = button.dataset.year || "";
-                const section = button.dataset.section || "";
-                const amount = button.dataset.amount || "";
-                const date = button.dataset.date || "";
-                const officeInCharge = button.dataset.officeInCharge || "";
-                const description = button.dataset.description || "";
-    
-                // Populate modal fields with data from the row
-                document.getElementById("updateName").value = studentName;
-                document.getElementById("updateStudentId").value = studentId;
-                document.getElementById("updateSem").value = sem;
-                document.getElementById("updateYear").value = year;
-                document.getElementById("updateSection").value = section;
-                document.getElementById("updateAmount").value = amount;
-                document.getElementById("updateDate").value = date;
-                document.getElementById("updateOfficeInCharge").value = officeInCharge;
-                document.getElementById("updateDescription").value = description;
-            };
-    
-            function closeUpdateModal() {
-                const updateModal = document.getElementById("updateModal");
-                updateModal.style.display = "none";
-            }
-    
-            window.closeUpdateModal = closeUpdateModal;
-    
-    
-            function updateStudent() {
-    // Get values from the modal input fields
-    const studentname = document.getElementById("updateName").value;
-    const studentId = document.getElementById("updateStudentId").value;
-    const sem = document.getElementById("updateSem").value;
-    const year = document.getElementById("updateYear").value;
-    const section = document.getElementById("updateSection").value;
-    const amount = document.getElementById("updateAmount").value;
-    const date = document.getElementById("updateDate").value;
-    const office_in_charge = document.getElementById("updateOfficeInCharge").value;
-    const description = document.getElementById("updateDescription").value;
+              });
+          } else {
+            console.log("Deletion canceled.");
+          }
+        };
 
-    // Prepare the payload for the update API
-    const payload = {
-        studentname: studentname,
-        studentId: studentId,
-        sem: sem,
-        year: year,
-        section: section,
-        amount: amount,
-        date: date,
-        office_in_charge: office_in_charge,
-        description: description
-    };
+        window.openUpdateModal = function (button) {
+          console.log(
+            "Opening update modal for student ID:",
+            button.dataset.studentId
+          );
+          const updateModal = document.getElementById("updateModal");
+          updateModal.style.display = "block";
 
-    // Send the update request to the server
-    fetch('https://jspaysite.fusiontechph.com/public/postUpdate', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload),
-    })
-        .then(response => {
-            if (!response.ok) {
+          // Store the clicked update button globally
+          updateButton = button;
+
+          // Extract data from the button's dataset attribute
+          const studentId = button.dataset.studentId || "";
+          const studentName = button.dataset.studentName || "";
+          const sem = button.dataset.sem || "";
+          const year = button.dataset.year || "";
+          const section = button.dataset.section || "";
+          const amount = button.dataset.amount || "";
+          const date = button.dataset.date || "";
+          const officeInCharge = button.dataset.officeInCharge || "";
+          const description = button.dataset.description || "";
+
+          // Populate modal fields with data from the row
+          document.getElementById("updateName").value = studentName;
+          document.getElementById("updateStudentId").value = studentId;
+          document.getElementById("updateSem").value = sem;
+          document.getElementById("updateYear").value = year;
+          document.getElementById("updateSection").value = section;
+          document.getElementById("updateAmount").value = amount;
+          document.getElementById("updateDate").value = date;
+          document.getElementById("updateOfficeInCharge").value =
+            officeInCharge;
+          document.getElementById("updateDescription").value = description;
+        };
+
+        function closeUpdateModal() {
+          const updateModal = document.getElementById("updateModal");
+          updateModal.style.display = "none";
+        }
+
+        window.closeUpdateModal = closeUpdateModal;
+
+        function updateStudent() {
+          // Get values from the modal input fields
+          const studentname = document.getElementById("updateName").value;
+          const studentId = document.getElementById("updateStudentId").value;
+          const sem = document.getElementById("updateSem").value;
+          const year = document.getElementById("updateYear").value;
+          const section = document.getElementById("updateSection").value;
+          const amount = document.getElementById("updateAmount").value;
+          const date = document.getElementById("updateDate").value;
+          const office_in_charge = document.getElementById(
+            "updateOfficeInCharge"
+          ).value;
+          const description =
+            document.getElementById("updateDescription").value;
+
+          // Prepare the payload for the update API
+          const payload = {
+            studentname: studentname,
+            studentId: studentId,
+            sem: sem,
+            year: year,
+            section: section,
+            amount: amount,
+            date: date,
+            office_in_charge: office_in_charge,
+            description: description,
+          };
+
+          // Send the update request to the server
+          fetch("https://jspaysite.fusiontechph.com/public/postUpdate", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(payload),
+          })
+            .then((response) => {
+              if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-            return response.json();
-        })
-        .then(data => {
-            // Handle the response data as needed
-            console.log("Update response:", data);
+              }
+              return response.json();
+            })
+            .then((data) => {
+              // Handle the response data as needed
+              console.log("Update response:", data);
 
-            // Close the modal after successful update
-            closeUpdateModal();
+              // Close the modal after successful update
+              closeUpdateModal();
 
-            // Refresh the data
-            fetchData();
-            alert("Update successful!");
-        })
-        .catch(error => {
-            console.error("Error updating student:", error);
-            // Handle the error as needed
-        });
-}
+              // Refresh the data
+              fetchData();
+              alert("Update successful!");
+            })
+            .catch((error) => {
+              console.error("Error updating student:", error);
+              // Handle the error as needed
+            });
+        }
 
-            window.updateStudent = updateStudent;
-    
-            function updatePaginationControls() {
-                currentPageSpan.innerText = currentPage;
-                document.getElementById("prevPage").disabled = currentPage === 1;
-                document.getElementById("nextPage").disabled = currentPage >= totalPages;
-            }
-    
-            window.changePage = function (offset) {
-                console.log("Changing page", offset, currentPage, totalPages);
-                currentPage += offset;
-                if (currentPage < 1) {
-                    currentPage = 1;
-                } else if (currentPage > totalPages) {
-                    currentPage = totalPages;
-                }
-                fetchData();
-            };
-    
-            // Initial fetch on page load
-            fetchData();
-        });
+        window.updateStudent = updateStudent;
+
+        function updatePaginationControls() {
+          currentPageSpan.innerText = currentPage;
+          document.getElementById("prevPage").disabled = currentPage === 1;
+          document.getElementById("nextPage").disabled =
+            currentPage >= totalPages;
+        }
+
+        window.changePage = function (offset) {
+          console.log("Changing page", offset, currentPage, totalPages);
+          currentPage += offset;
+          if (currentPage < 1) {
+            currentPage = 1;
+          } else if (currentPage > totalPages) {
+            currentPage = totalPages;
+          }
+          fetchData();
+        };
+
+        // Initial fetch on page load
+        fetchData();
+      });
     </script>
-    
-</body>
-
+  </body>
 </html>

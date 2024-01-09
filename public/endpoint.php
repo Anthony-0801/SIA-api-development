@@ -33,7 +33,7 @@ $app->post('/postAdding', function ($request, $response, $args) {
     $description = filter_var($data->description, FILTER_SANITIZE_STRING);
 
     // Database
-     $servername = "srv443.hstgr.io";
+    $servername = "srv443.hstgr.io";
     $username = "u475920781_jspaysite";
     $password = "jspaysite4321A";
     $dbname = "u475920781_jspaysite";
@@ -76,7 +76,7 @@ $app->post('/postAdding', function ($request, $response, $args) {
 //endpoint for retrieval
 $app->get('/postretrieve', function (Request $request, Response $response, array $args) {
     // Database
-     $servername = "srv443.hstgr.io";
+    $servername = "srv443.hstgr.io";
     $username = "u475920781_jspaysite";
     $password = "jspaysite4321A";
     $dbname = "u475920781_jspaysite";
@@ -156,7 +156,7 @@ $app->get('/postretrieve', function (Request $request, Response $response, array
 
 $app->get('/postView', function (Request $request, Response $response, array $args) {
     // Database
-     $servername = "srv443.hstgr.io";
+    $servername = "srv443.hstgr.io";
     $username = "u475920781_jspaysite";
     $password = "jspaysite4321A";
     $dbname = "u475920781_jspaysite";
@@ -214,7 +214,7 @@ $app->post('/postUpdate', function (Request $request, Response $response, array 
     $description = filter_var($data->description, FILTER_SANITIZE_STRING);
 
     // Database
-     $servername = "srv443.hstgr.io";
+    $servername = "srv443.hstgr.io";
     $username = "u475920781_jspaysite";
     $password = "jspaysite4321A";
     $dbname = "u475920781_jspaysite";
@@ -248,7 +248,7 @@ $app->delete('/postDelete', function (Request $request, Response $response, arra
     $studentId = filter_var($data->studentId, FILTER_SANITIZE_STRING);
 
     // Database
-     $servername = "srv443.hstgr.io";
+    $servername = "srv443.hstgr.io";
     $username = "u475920781_jspaysite";
     $password = "jspaysite4321A";
     $dbname = "u475920781_jspaysite";
@@ -276,7 +276,7 @@ $app->delete('/postDelete', function (Request $request, Response $response, arra
 //endpoint for history
 $app->get('/posthistory', function (Request $request, Response $response, array $args) {
     // Database
-     $servername = "srv443.hstgr.io";
+    $servername = "srv443.hstgr.io";
     $username = "u475920781_jspaysite";
     $password = "jspaysite4321A";
     $dbname = "u475920781_jspaysite";
@@ -354,7 +354,198 @@ $app->get('/posthistory', function (Request $request, Response $response, array 
     return $response->withHeader('Content-Type', 'application/json');
 });
 
+// for the 'Print Summary' function
+$app->get('/printSummary', function (Request $request, Response $response, array $args) {
+    require 'FPDF/fpdf.php';
 
+    $servername = "srv443.hstgr.io";
+    $username = "u475920781_jspaysite";
+    $password = "jspaysite4321A";
+    $dbname = "u475920781_jspaysite";
+
+    $conn = new mysqli($servername, $username, $password, $dbname);
+
+    if ($conn->connect_error) {
+        $error = array("status" => "error", "message" => "Connection failed: " . $conn->connect_error);
+        $response->getBody()->write(json_encode($error));
+        return $response->withHeader('Content-Type', 'application/json')->withStatus(500);
+    }
+
+    $summaryQuery = "SELECT
+                    Year, Section, studentId, studentname, description, amount
+                    FROM student_profile
+                    ORDER BY Year, Section";
+
+    $result = $conn->query($summaryQuery);
+
+    if ($result === false) {
+        $error = array("status" => "error", "message" => "Query failed: " . $conn->error);
+        $response->getBody()->write(json_encode($error));
+        $conn->close();
+        return $response->withHeader('Content-Type', 'application/json')->withStatus(500);
+    }
+
+    // creating a PDF document
+    $pdf = new FPDF();
+    $pdf->AddPage();
+
+     // title
+     $pdf->SetFont('Arial', 'B', 20);
+    $pdf->Cell(190, 10, 'JSITES Membership Fee Records', 0, 1, 'C'); 
+    $pdf->Ln(); 
+
+    $currentYear = null;
+    $currentSection = null;
+    $totalCollected = 0;
+    $totalCollectable = 0;
+    $totalStudents = 0;
+
+    while ($row = $result->fetch_assoc()) {
+        if ($row['description'] === 'paid') {
+            $totalCollected += $row['amount'];
+        } elseif ($row['description'] === 'not paid') {
+            $totalCollectable += $row['amount'];
+        }
+        $totalStudents++;
+    }
+
+    // for the overall total
+    $pdf->SetFont('Arial', 'B', 14);
+    $pdf->Cell(90, 10, 'Overall Total Amount Collected:', 0);
+    $pdf->Cell(40, 10, 'Php ' . $totalCollected, 0);
+    $pdf->Ln();
+    $pdf->Cell(90, 10, 'Overall Total Amount Collectable:', 0);
+    $pdf->Cell(40, 10, 'Php ' . $totalCollectable, 0);
+    $pdf->Ln();
+    $pdf->Cell(90, 10, 'Overall Total Students:', 0);
+    $pdf->Cell(40, 10, 'Php ' . $totalStudents, 0);
+    $pdf->Ln(); 
+    $pdf->Ln(); 
+
+    // for the overall total
+    $totalCollected = 0;
+    $totalCollectable = 0;
+    $totalStudents = 0;
+
+    $currentYear = null;
+    $currentSection = null;
+
+    $result->data_seek(0);
+    while ($row = $result->fetch_assoc()) {
+        if ($currentYear !== $row['Year'] || $currentSection !== $row['Section']) {
+            if ($currentYear !== null) {
+                $pdf->SetFont('Arial', 'B', 12);
+                $pdf->Cell(100, 10, 'Total Amount Collected:', 1);
+                $pdf->Cell(50, 10, 'Php ' . $totalCollected, 1);
+                $pdf->Ln(); 
+                $pdf->Cell(100, 10, 'Total Amount Collectable:', 1);
+                $pdf->Cell(50, 10, 'Php ' . $totalCollectable, 1);
+                $pdf->Ln(); 
+                $pdf->Cell(100, 10, 'Total Students:', 1);
+                $pdf->Cell(50, 10, $totalStudents, 1);
+                $pdf->Ln(); 
+                $pdf->Ln(); 
+            }
+            $pdf->SetFont('Arial', 'B', 12);
+            $pdf->Cell(40, 10, 'Year & Section: ' . $row['Year'] . ' - ' . $row['Section']);
+            $pdf->Ln(); 
+            $pdf->SetFont('Arial', 'B', 12);
+            $pdf->Cell(50, 10, 'Student ID', 1);
+            $pdf->Cell(50, 10, 'Student Name', 1);
+            $pdf->Cell(50, 10, 'Status', 1);
+            $pdf->Ln(); 
+
+            //for the total by year
+            $totalCollected = 0;
+            $totalCollectable = 0;
+            $totalStudents = 0;
+
+            $currentYear = $row['Year'];
+            $currentSection = $row['Section'];
+        }
+
+        if ($row['description'] === 'paid') {
+            $totalCollected += $row['amount'];
+        } elseif ($row['description'] === 'not paid') {
+            $totalCollectable += $row['amount'];
+        }
+
+        $totalStudents++;
+
+        $pdf->SetFont('Arial', '', 12);
+        $pdf->Cell(50, 10, $row['studentId'], 1);
+        $pdf->Cell(50, 10, $row['studentname'], 1);
+        $pdf->Cell(50, 10, $row['description'], 1);
+        $pdf->Ln(); 
+    }
+
+    $pdf->SetFont('Arial', 'B', 12);
+    $pdf->Cell(100, 10, 'Total Amount Collected:', 1);
+    $pdf->Cell(50, 10, 'Php ' . $totalCollected, 1);
+    $pdf->Ln(); 
+    $pdf->Cell(100, 10, 'Total Amount Collectable:', 1);
+    $pdf->Cell(50, 10, 'Php ' . $totalCollectable, 1);
+    $pdf->Ln();
+    $pdf->Cell(100, 10, 'Total Students:', 1);
+    $pdf->Cell(50, 10, $totalStudents, 1);
+    $pdf->Ln(); 
+
+    $pdfContent = $pdf->Output("", "S");
+
+    $conn->close();
+
+    $response = $response
+        ->withHeader('Content-Type', 'application/pdf')
+        ->withHeader('Content-Disposition', 'inline; filename="summary.pdf"')
+        ->withHeader('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0')
+        ->withHeader('Cache-Control', 'post-check=0, pre-check=0')
+        ->withHeader('Pragma', 'no-cache')
+        ->withStatus(200);
+
+    $response->getBody()->write($pdfContent);
+
+    return $response;
+});
+
+
+function getTotalAmount($description) {
+    $servername = "srv443.hstgr.io";
+    $username = "u475920781_jspaysite";
+    $password = "jspaysite4321A";
+    $dbname = "u475920781_jspaysite";
+
+    $conn = new mysqli($servername, $username, $password, $dbname);
+
+    $sql = "SELECT SUM(amount) as total FROM student_profile WHERE description = '$description'";
+    $result = $conn->query($sql);
+
+    $total = $result->fetch_assoc()['total'];
+
+    $conn->close();
+
+    return $total;
+}
+
+function getTableData($year, $section) {
+    $servername = "srv443.hstgr.io";
+    $username = "u475920781_jspaysite";
+    $password = "jspaysite4321A";
+    $dbname = "u475920781_jspaysite";
+
+    $conn = new mysqli($servername, $username, $password, $dbname);
+
+    $sql = "SELECT studentId, studentname, description FROM student_profile WHERE year = '$year' AND section = '$section' ORDER BY year, section";
+    $result = $conn->query($sql);
+
+    $data = array();
+
+    while ($row = $result->fetch_assoc()) {
+        array_push($data, $row);
+    }
+
+    $conn->close();
+
+    return $data;
+}
 
 $app->run();
-

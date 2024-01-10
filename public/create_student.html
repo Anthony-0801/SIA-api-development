@@ -29,7 +29,7 @@
             <p>JSITEs<br>Payment Management System</p>
         </div>
         <div>
-            <p>Options</p>
+            <p> </p>
         </div>
         <div class="right-nav-bottom">
             <a href="view.html"><i class="fa-solid fa-house"></i> Home</a>
@@ -37,7 +37,7 @@
               ><i class="fa-solid fa-user-group"></i> Add Student Profile</a
             >
             <a href="search_student.html"
-              ><i class="fa-solid fa-magnifying-glass"></i> Search Student</a
+              ><i class="fa-solid fa-magnifying-glass"></i> Student List</a
             >
           </div>
           <div class="logout">
@@ -66,10 +66,26 @@
                     </div>
 
                     <div class="input-group">
-                        <label for="officer">Officer in Charge</label><br>
-                        <input type="text" id="office_in_charge" name="office_in_charge"  required>
-                    </div> 
+                        <label for="officer">Officer-in-Charge</label><br>
+                        <select id="office_in_charge" name="office_in_charge" required>
+                            <option value="" selected disabled>- -select- -</option>
+                            <option value="1">President</option>
+                            <option value="2">Vice President</option>
+                            <option value="3">Secretary</option>
+                            <option value="4">Assistant Secretary</option>
+                            <option value="1">Treasurer</option>
+                            <option value="2">Assistant Treasurer</option>
+                            <option value="3">Auditor</option>
+                            <option value="4">Business Manager 1</option>
+                            <option value="1">Business Manager 2</option>
+                            <option value="2">Public Relations Officer 1</option>
+                            <option value="3">Public Relations Officer 2</option>
+                            <option value="4">Senior Graphic Designer</option>
+                            <option value="4">Junior Graphic Designer</option>
+                        </select>
+                    </div>
                 </div>
+
                 <div class="insert-tab">
                     <div class="input-group">
                         <label for="sem">Sem</label><br>
@@ -84,10 +100,10 @@
                         <label for="year">Year level</label><br>
                         <select id="year" name="year" required>
                             <option value="" selected disabled>- -select- -</option>
-                            <option value="1">First Year</option>
-                            <option value="2">Second Year</option>
-                            <option value="3">Third Year</option>
-                            <option value="4">Fourth Year</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
                         </select>
                     </div>
                     
@@ -95,19 +111,19 @@
                         <label for="section">Section</label><br>
                         <select id="section" name="section" required>
                             <option value="" selected disabled>- -select- -</option>
-                            <option value="A">Section A</option>
-                            <option value="B">Section B</option>
-                            <option value="C">Section C</option>
-                            <option value="D">Section D</option>
-                            <option value="E">Section E</option>
+                            <option value="A">A</option>
+                            <option value="B">B</option>
+                            <option value="C">C</option>
+                            <option value="D">D</option>
+                            <option value="E">E</option>
                         </select>
                     </div>
                     <div class="input-group">
                         <label for="description">Select Status:</label><br>
                         <select id="description" name="descriptions"  required>
                         <option value="" selected disabled>- -select- -</option>
-                        <option value="paid">Paid</option>
-                        <option value="not paid">Not Paid</option>
+                        <option value="Paid">Paid</option>
+                        <option value="Not Paid">Not Paid</option>
                         </select>
                     </div>
                     <div class="input-group" style="  display: none;">

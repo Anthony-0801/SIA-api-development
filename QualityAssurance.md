@@ -39,6 +39,10 @@ Student name accepts integer values. It should accept characters only.
 ##Problem 6
 Student Id Accepts characters. There's no validation method. It should accept Integers only.
 
+##Problem 7
+The Dropdown for officers incharge does not reflect the positions in the student list.
+
+
 ##SUGGESTIONS
 
 1. Convert the input fields for semester, year level, section, and selection status into dropdowns instead of text boxes. (Fixed by Andrei)

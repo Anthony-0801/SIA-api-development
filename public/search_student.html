@@ -25,36 +25,43 @@
       </button>
     </div>
     <div class="right-nav">
-        <div class="right-nav-top">
-            <img src="img/LOGO.png" alt="Jsites Logo">
-            <p>JSITEs<br>Payment Management System</p>
-        </div>
-        <div>
-            <p>Options</p>
-        </div>
-        <div class="right-nav-bottom">
-            <a href="view.html"><i class="fa-solid fa-house"></i> Home</a>
-            <a href="create_student.html"
-              ><i class="fa-solid fa-user-group"></i> Add Student Profile</a
-            >
-            <a href="search_student.html"
-              ><i class="fa-solid fa-magnifying-glass"></i> Student List</a
-            >
-          </div>
-          <div class="logout">
-            <a href="index.html" style="text-decoration: none; color: inherit;">Logout</a>
-          </div>
+      <div class="right-nav-top">
+        <img src="img/LOGO.png" alt="Jsites Logo" />
+        <p>JSITEs<br />Payment Management System</p>
+      </div>
+      <div>
+        <p>Options</p>
+      </div>
+      <div class="right-nav-bottom">
+        <a href="view.html"><i class="fa-solid fa-house"></i> Home</a>
+        <a href="create_student.html"
+          ><i class="fa-solid fa-user-group"></i> Add Student Profile</a
+        >
+        <a href="search_student.html"
+          ><i class="fa-solid fa-magnifying-glass"></i> Student List</a
+        >
+      </div>
+      <div class="logout">
+        <a href="index.html" style="text-decoration: none; color: inherit"
+          >Logout</a
+        >
+      </div>
     </div>
     <div class="container">
-        <div id="search-title">
-            <h1>STUDENT LIST</h1>
+      <div id="search-title">
+        <h1>STUDENT LIST</h1>
+      </div>
+      <div id="search-elements">
+        <div id="search-container">
+          <button onclick="printSummary()">PRINT SUMMARY</button>
+          <input
+            type="text"
+            id="id_search"
+            value=""
+            placeholder="Enter Student ID"
+          />&nbsp;
+          <input type="button" id="searchBtn" value="SEARCH" />
         </div>
-        <div id="search-elements">
-            <div id="search-container">
-                <button onclick="printSummary()">PRINT SUMMARY</button>
-                <input type="text" id="id_search" value="" placeholder="Enter Student ID">&nbsp;
-                <input type="button" id="searchBtn" value="SEARCH">
-            </div>
 
         <div class="container-table">
           <table>
@@ -126,24 +133,55 @@
           <option value="25" selected>25</option>
         </select>
 
-            <label for="updateDate">Date:</label>
-            <input type="date" id="updateDate"/>
+        <label for="updateDate">Date:</label>
+        <input type="date" id="updateDate" />
 
-            <label for="updateOfficeInCharge">Officer-in-charge:</label>
-            <input type="text" id="updateOfficeInCharge"/>
+        <label for="updateOfficeInCharge">Officer-in-Charge:</label><br />
+        <select id="updateOfficeInCharge" name="office_in_charge" required>
+          <option value="" selected disabled>- -select- -</option>
+          <option value="President">President</option>
+          <option value="Vice President">Vice President</option>
+          <option value="Secretary">Secretary</option>
+          <option value="Assistant Secretary">Assistant Secretary</option>
+          <option value="Treasurer">Treasurer</option>
+          <option value="Assistant Treasurer">Assistant Treasurer</option>
+          <option value="Auditor">Auditor</option>
+          <option value="Business Manager 1">Business Manager 1</option>
+          <option value="Business Manager 2">Business Manager 2</option>
+          <option value="Public Relations Officer 1">
+            Public Relations Officer 1
+          </option>
+          <option value="Public Relations Officer 2">
+            Public Relations Officer 2
+          </option>
+          <option value="Senior Graphic Designer">
+            Senior Graphic Designer
+          </option>
+          <option value="Junior Graphic Designer">
+            Junior Graphic Designer
+          </option>
+          <option value="Jsites Adviser">Jsites Adviser</option>
+          <option value="Faculty">Faculty</option>
+          "
+        </select>
 
-            
-            <label for="updateDescription">Select Status:</label>
-            <select id="updateDescription" name="descriptions" >
-            <option value="" selected disabled>--select--</option>
-            <option value="Paid">Paid</option>
-            <option value="Not Paid">Not Paid</option>
-            </select>
+        <label for="updateDescription">Select Status:</label>
+        <select id="updateDescription" name="descriptions">
+          <option value="" selected disabled>--select--</option>
+          <option value="Paid">Paid</option>
+          <option value="Not Paid">Not Paid</option>
+        </select>
 
-            <div>
-                <button class="update-button" onclick="updateStudent()" id="updateButton">Update</button>
-            </div>
+        <div>
+          <button
+            class="update-button"
+            onclick="updateStudent()"
+            id="updateButton"
+          >
+            Update
+          </button>
         </div>
+      </div>
     </div>
 
     <script>

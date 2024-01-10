@@ -401,9 +401,9 @@ $app->get('/printSummary', function (Request $request, Response $response, array
     $totalStudents = 0;
 
     while ($row = $result->fetch_assoc()) {
-        if ($row['description'] === 'paid') {
+        if ($row['description'] === 'Paid') {
             $totalCollected += $row['amount'];
-        } elseif ($row['description'] === 'not paid') {
+        } elseif ($row['description'] === 'Not Paid') {
             $totalCollectable += $row['amount'];
         }
         $totalStudents++;
@@ -464,9 +464,9 @@ $app->get('/printSummary', function (Request $request, Response $response, array
             $currentSection = $row['Section'];
         }
 
-        if ($row['description'] === 'paid') {
+        if ($row['description'] === 'Paid') {
             $totalCollected += $row['amount'];
-        } elseif ($row['description'] === 'not paid') {
+        } elseif ($row['description'] === 'Not Paid') {
             $totalCollectable += $row['amount'];
         }
 

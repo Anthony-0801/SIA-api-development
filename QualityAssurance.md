@@ -1,6 +1,6 @@
-###Problem 1
+###Problem 1 (Fixed by Andrei)
 
-##Dashboard for Unpaid Function Not Working in View.html
+##Dashboard for Unpaid Function Not Working in View.html 
 
 Misfunctioning Unpaid Function. The system successfully saves unpaid student profiles in the database. However, the dashboard appears to be inconsistent in counting and displaying unpaid status. Changing the payment status from "paid" to "unpaid" or vice versa is recorded in the database but not displayed in the dashboard.
 
@@ -12,7 +12,7 @@ A software bug in the dashboard payment status update code may explain this disc
 
 Review the backend code for the 'Unpaid'
 
-#Problem 2
+###Problem 2
 
 ##The alert doesn't work when saving data
 
@@ -26,16 +26,16 @@ There is a malfunction in the system's ability to save student profiles in this 
 
 The malfunctioning notification when storing student profiles can be fixed by thoroughly reviewing the code that activates the alert and ensuring its seamless interaction with the save process. Check error messages and console logs for clues to the alert's absence. Complete testing to ensure functionality and consider adding error handling to provide users with accurate feedback on failed save attempts.
 
-#Problem 3
+###Problem 3 (Already added by Roland.)
 
-##The print function has not been added yet.
+##The print function has not been added yet. 
 
 ##SUGGESTIONS
 
-1. Convert the input fields for semester, year level, section, and selection status into dropdowns instead of text boxes.
-2. Modify the CSS for the update.
-3. Replace the icon on the dashboard with something more relevant.
-4. Removing the option from the right navigation; it might be better without it.
+1. Convert the input fields for semester, year level, section, and selection status into dropdowns instead of text boxes. (Fixed by Andrei)
+2. Modify the CSS for the update. (Fixed by Roland)
+3. Replace the icon on the dashboard with something more relevant. (Fixed by Roland. Icons designed by Aljon)
+4. Removing the option from the right navigation; it might be better without it. (Fixed by Roland)
 
 
 

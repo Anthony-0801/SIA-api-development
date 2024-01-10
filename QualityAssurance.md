@@ -30,12 +30,20 @@ The malfunctioning notification when storing student profiles can be fixed by th
 
 ##The print function has not been added yet. 
 
+##Problem 4
+Officer In Charge should be a drop-down of positions.
+
+##Problem 5
+Student name accepts integer values. It should accept characters only.
+
+##Problem 6
+Student Id Accepts characters. There's no validation method. It should accept Integers only.
+
 ##SUGGESTIONS
 
 1. Convert the input fields for semester, year level, section, and selection status into dropdowns instead of text boxes. (Fixed by Andrei)
 2. Modify the CSS for the update. (Fixed by Roland)
 3. Replace the icon on the dashboard with something more relevant. (Fixed by Roland. Icons designed by Aljon)
 4. Removing the option from the right navigation; it might be better without it. (Fixed by Roland)
-
-
+5. Change Search students to "students" only.
 

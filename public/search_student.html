@@ -106,30 +106,43 @@
         <input type="text" id="updateStudentId" />
 
         <label for="updateSem">Sem:</label>
-        <input type="text" id="updateSem" />
-
+        <select id="updateSem" name="sem" required>
+          <option value="" selected disabled>- -select- -</option>
+          <option value="1st">1st</option>
+          <option value="2nd">2nd</option>
+        </select>
         <label for="updateYear">Year level:</label>
-        <input type="text" id="updateYear" />
-
-        <label for="updateSection">Section:</label>
-        <input type="text" id="updateSection" />
-
-        <label for="updateAmount">Amount:</label>
-        <input type="text" id="updateAmount" />
+        <select id="updateYear" name="year" required>
+          <option value="" selected disabled>- -select- -</option>
+          <option value="1">First Year</option>
+          <option value="2">Second Year</option>
+          <option value="3">Third Year</option>
+          <option value="4">Fourth Year</option>
+        </select>
+        <label for="updateSection">Section</label>
+        <select id="updateSection" name="section" required>
+          <option value="" selected disabled>- -select- -</option>
+          <option value="A">Section A</option>
+          <option value="B">Section B</option>
+          <option value="C">Section C</option>
+          <option value="D">Section D</option>
+          <option value="E">Section E</option>
+        </select>
+        <label for="updateAmount" style="display: none">Amount</label>
+        <select style="display: none" id="updateAmount" name="amount" required>
+          <option value="25" selected>25</option>
+        </select>
 
         <label for="updateDate">Date:</label>
-        <input type="text" id="updateDate" />
-
+        <input type="date" id="updateDate" />
         <label for="updateOfficeInCharge">Officer-in-charge:</label>
         <input type="text" id="updateOfficeInCharge" />
-
         <label for="updateDescription">Select Status:</label>
         <select id="updateDescription" name="descriptions">
           <option value="" selected disabled>--select--</option>
           <option value="paid">Paid</option>
           <option value="not paid">Not Paid</option>
         </select>
-
         <div>
           <button
             class="update-button"
@@ -277,7 +290,7 @@
 
           if (isConfirmed) {
             // Send a DELETE request to the '/postDelete' endpoint
-            fetch("https://jspaysite.fusiontechph.com/public/postDelete", {
+            fetch("https://jspaysite.fusiontechph.com/public//postDelete", {
               method: "DELETE",
               headers: {
                 "Content-Type": "application/json",

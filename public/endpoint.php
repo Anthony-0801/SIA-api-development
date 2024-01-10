@@ -418,7 +418,7 @@ $app->get('/printSummary', function (Request $request, Response $response, array
     $pdf->Cell(40, 10, 'Php ' . $totalCollectable, 0);
     $pdf->Ln();
     $pdf->Cell(90, 10, 'Overall Total Students:', 0);
-    $pdf->Cell(40, 10, 'Php ' . $totalStudents, 0);
+    $pdf->Cell(40, 10,  $totalStudents, 0);
     $pdf->Ln(); 
     $pdf->Ln(); 
 

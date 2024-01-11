@@ -40,7 +40,7 @@
             <h1>VIEW INFORMATION</h1>
         </div>
         <div class="cards" id="dashboardData">
-            <!-- Dynamic content will be inserted here -->
+            <!-- the dashboard boxes will automatically fill this area -->
         </div>
     </div>
 
@@ -56,21 +56,19 @@
                 rightNav.classList.toggle("show");
             });
 
-            // Close the right navigation when clicking on an element inside .right-nav-top
+            // for closing the right navigation when clicking on an element inside .right-nav-top
             rightNavTop.addEventListener("click", function () {
                 rightNav.classList.remove("show");
             });
 
-            // When the DOM is ready
             $(document).ready(function () {
-                // Fetch data from the API
                 $.ajax({
                     url: "http://127.0.0.1/SIA-api-development/public/postView",
                     method: "GET",
                     dataType: "json",
                     success: function (data) {
                         console.log("API Response:", data);
-                        // Update the content dynamically
+                        // for updating the content dynamically
                         updateDashboard(data);
                     },
                     error: function (xhr, status, error) {
@@ -79,13 +77,11 @@
                 });
             });
 
-            // Function to update the dashboard content
             function updateDashboard(data) {
-                // Ensure that the data is available and has the expected structure
                 if (data && data.status === "success" && data.data) {
                     var dashboardData = data.data;
 
-                    // Update the content dynamically
+                    // the dashboard boxes
                     $("#dashboardData").html(`
                         <div class="cards-child">
                             <div class="cards-child-texts">

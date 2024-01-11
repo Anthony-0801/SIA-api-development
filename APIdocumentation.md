@@ -132,4 +132,4 @@ URL: http://127.0.0.1/SIA-api-development/public/printSummary
 No request payload for GET requests.
 
 ### Response Format:
-The response will contain a summary of student records, such as the total number of records, total amount paid, and any other relevant summary information.
+The response will contain a summary of student records, such as the total number of records, the total amount paid, and any other relevant summary information.

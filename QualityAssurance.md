@@ -22,10 +22,10 @@ Problem 4
 Officer In Charge should be a drop-down of positions. (Fixed by Roland and Andrei)
 
 Problem 5
-Student name accepts integer values. It should accept characters only.
+Student name accepts integer values. It should accept characters only. 
 
 Problem 6
-Student Id Accepts characters. There's no validation method. It should accept Integers only.
+Student Id Accepts characters. There's no validation method. It should accept Integers only. (Fixed by Roland)
 
 Problem 7
 The Dropdown for officers incharge does not reflect the positions in the student list. (Fixed by Andrei)

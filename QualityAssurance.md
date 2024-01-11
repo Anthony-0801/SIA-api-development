@@ -19,7 +19,7 @@ Problem 3 (Already added by Roland.)
 The print function has not been added yet. 
 
 Problem 4
-Officer In Charge should be a drop-down of positions.
+Officer In Charge should be a drop-down of positions. (Fixed by Roland and Andrei)
 
 Problem 5
 Student name accepts integer values. It should accept characters only.
@@ -28,7 +28,7 @@ Problem 6
 Student Id Accepts characters. There's no validation method. It should accept Integers only.
 
 Problem 7
-The Dropdown for officers incharge does not reflect the positions in the student list.
+The Dropdown for officers incharge does not reflect the positions in the student list. (Fixed by Andrei)
 
 
 
@@ -38,5 +38,5 @@ SUGGESTIONS
 2. Modify the CSS for the update. (Fixed by Roland)
 3. Replace the icon on the dashboard with something more relevant. (Fixed by Roland. Icons designed by Aljon)
 4. Removing the option from the right navigation; it might be better without it. (Fixed by Roland)
-5. Change Search students to "students" only.
+5. Change Search students to "students" only. (Fixed)
 

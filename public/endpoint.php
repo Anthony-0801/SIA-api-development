@@ -366,10 +366,10 @@ $app->get('/printSummary', function (Request $request, Response $response, array
     $pdf = new FPDF();
     $pdf->AddPage();
 
-     // title
-     $pdf->SetFont('Arial', 'B', 20);
-    $pdf->Cell(190, 10, 'JSITES Membership Fee Records', 0, 1, 'C'); 
-    $pdf->Ln(); 
+    // title
+    $pdf->SetFont('Arial', 'B', 20);
+    $pdf->Cell(190, 10, 'JSITES Membership Fee Records', 0, 1, 'C');
+    $pdf->Ln();
 
     $currentYear = null;
     $currentSection = null;
@@ -378,9 +378,9 @@ $app->get('/printSummary', function (Request $request, Response $response, array
     $totalStudents = 0;
 
     while ($row = $result->fetch_assoc()) {
-        if ($row['description'] === 'paid') {
+        if ($row['description'] === 'Paid') {
             $totalCollected += $row['amount'];
-        } elseif ($row['description'] === 'not paid') {
+        } elseif ($row['description'] === 'Not Paid') {
             $totalCollectable += $row['amount'];
         }
         $totalStudents++;
@@ -395,9 +395,9 @@ $app->get('/printSummary', function (Request $request, Response $response, array
     $pdf->Cell(40, 10, 'Php ' . $totalCollectable, 0);
     $pdf->Ln();
     $pdf->Cell(90, 10, 'Overall Total Students:', 0);
-    $pdf->Cell(40, 10,  $totalStudents, 0);
-    $pdf->Ln(); 
-    $pdf->Ln(); 
+    $pdf->Cell(40, 10, $totalStudents, 0);
+    $pdf->Ln();
+    $pdf->Ln();
 
     // for the overall total
     $totalCollected = 0;
@@ -414,23 +414,23 @@ $app->get('/printSummary', function (Request $request, Response $response, array
                 $pdf->SetFont('Arial', 'B', 12);
                 $pdf->Cell(100, 10, 'Total Amount Collected:', 1);
                 $pdf->Cell(50, 10, 'Php ' . $totalCollected, 1);
-                $pdf->Ln(); 
+                $pdf->Ln();
                 $pdf->Cell(100, 10, 'Total Amount Collectable:', 1);
                 $pdf->Cell(50, 10, 'Php ' . $totalCollectable, 1);
-                $pdf->Ln(); 
+                $pdf->Ln();
                 $pdf->Cell(100, 10, 'Total Students:', 1);
                 $pdf->Cell(50, 10, $totalStudents, 1);
-                $pdf->Ln(); 
-                $pdf->Ln(); 
+                $pdf->Ln();
+                $pdf->Ln();
             }
             $pdf->SetFont('Arial', 'B', 12);
             $pdf->Cell(40, 10, 'Year & Section: ' . $row['Year'] . ' - ' . $row['Section']);
-            $pdf->Ln(); 
+            $pdf->Ln();
             $pdf->SetFont('Arial', 'B', 12);
             $pdf->Cell(50, 10, 'Student ID', 1);
             $pdf->Cell(50, 10, 'Student Name', 1);
             $pdf->Cell(50, 10, 'Status', 1);
-            $pdf->Ln(); 
+            $pdf->Ln();
 
             //for the total by year
             $totalCollected = 0;
@@ -441,9 +441,9 @@ $app->get('/printSummary', function (Request $request, Response $response, array
             $currentSection = $row['Section'];
         }
 
-        if ($row['description'] === 'paid') {
+        if ($row['description'] === 'Paid') {
             $totalCollected += $row['amount'];
-        } elseif ($row['description'] === 'not paid') {
+        } elseif ($row['description'] === 'Not Paid') {
             $totalCollectable += $row['amount'];
         }
 
@@ -453,19 +453,19 @@ $app->get('/printSummary', function (Request $request, Response $response, array
         $pdf->Cell(50, 10, $row['studentId'], 1);
         $pdf->Cell(50, 10, $row['studentname'], 1);
         $pdf->Cell(50, 10, $row['description'], 1);
-        $pdf->Ln(); 
+        $pdf->Ln();
     }
 
     $pdf->SetFont('Arial', 'B', 12);
     $pdf->Cell(100, 10, 'Total Amount Collected:', 1);
     $pdf->Cell(50, 10, 'Php ' . $totalCollected, 1);
-    $pdf->Ln(); 
+    $pdf->Ln();
     $pdf->Cell(100, 10, 'Total Amount Collectable:', 1);
     $pdf->Cell(50, 10, 'Php ' . $totalCollectable, 1);
     $pdf->Ln();
     $pdf->Cell(100, 10, 'Total Students:', 1);
     $pdf->Cell(50, 10, $totalStudents, 1);
-    $pdf->Ln(); 
+    $pdf->Ln();
 
     $pdfContent = $pdf->Output("", "S");
 
@@ -485,7 +485,8 @@ $app->get('/printSummary', function (Request $request, Response $response, array
 });
 
 
-function getTotalAmount($description) {
+function getTotalAmount($description)
+{
     $servername = "localhost";
     $username = "root";
     $password = "";
@@ -503,7 +504,8 @@ function getTotalAmount($description) {
     return $total;
 }
 
-function getTableData($year, $section) {
+function getTableData($year, $section)
+{
     $servername = "localhost";
     $username = "root";
     $password = "";

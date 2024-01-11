@@ -1,11 +1,6 @@
 <?php
-// Enable CORS for all origins
 header("Access-Control-Allow-Origin: *");
-
-// Allow the following methods
 header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE");
-
-// Allow the following headers
 header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
 
 
@@ -17,11 +12,11 @@ require '../src/vendor/autoload.php';
 $app = new \Slim\App();
 
 
-//endpoint for Payment
+//endpoint for create_student
 $app->post('/postAdding', function ($request, $response, $args) {
     $data = json_decode($request->getBody());
 
-    // Validate and sanitize input
+    // validating and sanitizing the inputs
     $studentname = filter_var($data->studentname, FILTER_SANITIZE_STRING);
     $studentId = filter_var($data->studentId, FILTER_SANITIZE_STRING);
     $sem = filter_var($data->sem, FILTER_SANITIZE_STRING);
@@ -32,7 +27,6 @@ $app->post('/postAdding', function ($request, $response, $args) {
     $office_in_charge = filter_var($data->office_in_charge, FILTER_SANITIZE_STRING);
     $description = filter_var($data->description, FILTER_SANITIZE_STRING);
 
-    // Database
     $servername = "localhost";
     $username = "root";
     $password = "";
@@ -42,12 +36,12 @@ $app->post('/postAdding', function ($request, $response, $args) {
         $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        // Use prepared statements to prevent SQL injection
+        // using prepared statements (bindparam) to reduce the risk of sql injection
         $sql = "INSERT INTO student_profile (studentname, studentId, sem, section, year, amount, date, office_in_charge, description)
                 VALUES (:studentname, :studentId, :sem, :section, :year, :amount, :date, :office_in_charge, :description)";
         $stmt = $conn->prepare($sql);
 
-        // Bind parameters
+        // bind parameters
         $stmt->bindParam(':studentname', $studentname);
         $stmt->bindParam(':studentId', $studentId);
         $stmt->bindParam(':sem', $sem);
@@ -58,7 +52,6 @@ $app->post('/postAdding', function ($request, $response, $args) {
         $stmt->bindParam(':office_in_charge', $office_in_charge);
         $stmt->bindParam(':description', $description);
 
-        // Execute the query
         $stmt->execute();
 
         $response->getBody()->write(json_encode(array("status" => "success", "data" => null)));
@@ -75,28 +68,24 @@ $app->post('/postAdding', function ($request, $response, $args) {
 
 //endpoint for retrieval
 $app->get('/postretrieve', function (Request $request, Response $response, array $args) {
-    // Database
     $servername = "localhost";
     $username = "root";
     $password = "";
     $dbname = "db_jsites";
 
-    // Create connection
     $conn = new mysqli($servername, $username, $password, $dbname);
 
-    // Check connection
     if ($conn->connect_error) {
         $error = array("status" => "error", "message" => "Connection failed: " . $conn->connect_error);
         $response->getBody()->write(json_encode($error));
         return $response->withHeader('Content-Type', 'application/json')->withStatus(500);
     }
 
-    // Get pagination parameters from the request URL
+    // for getting the pagination parameters from the request URL
     $page = isset($_GET['page']) ? $_GET['page'] : 1;
-    $limit = isset($_GET['limit']) ? $_GET['limit'] : 25;  // Adjust the limit as needed
+    $limit = isset($_GET['limit']) ? $_GET['limit'] : 25; 
     $offset = ($page - 1) * $limit;
 
-    // No need to filter by studentId if it's not provided
     $sql = "SELECT * FROM student_profile LIMIT $limit OFFSET $offset";
 
     $result = $conn->query($sql);
@@ -126,7 +115,7 @@ $app->get('/postretrieve', function (Request $request, Response $response, array
         array_push($data, $rowData);
     }
 
-    // Perform a separate count query
+    // for performing a separate count query
     $countQuery = "SELECT COUNT(*) as total FROM student_profile";
     $countResult = $conn->query($countQuery);
 
@@ -137,41 +126,36 @@ $app->get('/postretrieve', function (Request $request, Response $response, array
         return $response->withHeader('Content-Type', 'application/json')->withStatus(500);
     }
 
-    // Fetch the total count
     $totalCount = $countResult->fetch_assoc()['total'];
 
-    // Close the database connection
     $conn->close();
 
-    // Prepare the response data
+    // for preparing the response data
     $data_body = array("status" => "success", "total" => $totalCount, "data" => $data);
 
-    // Write the response
+    // for writing the response data
     $response->getBody()->write(json_encode($data_body));
 
-    // Set the response headers and status code
+    // response header and status code
     return $response->withHeader('Content-Type', 'application/json')->withStatus(200);
 });
 
 
 $app->get('/postView', function (Request $request, Response $response, array $args) {
-    // Database
     $servername = "localhost";
     $username = "root";
     $password = "";
     $dbname = "db_jsites";
 
-    // Create connection
     $conn = new mysqli($servername, $username, $password, $dbname);
 
-    // Check connection
     if ($conn->connect_error) {
         $error = array("status" => "error", "message" => "Connection failed: " . $conn->connect_error);
         $response->getBody()->write(json_encode($error));
         return $response->withHeader('Content-Type', 'application/json')->withStatus(500);
     }
 
-    // Query to get dashboard data
+    // query for teh dashboard
     $dashboardQuery = "SELECT 
                             COUNT(*) as totalStudents, 
                             SUM(CASE WHEN description = 'paid' THEN amount ELSE 0 END) as totalFeesCollected,
@@ -202,7 +186,7 @@ $app->get('/postView', function (Request $request, Response $response, array $ar
 $app->post('/postUpdate', function (Request $request, Response $response, array $args) {
     $data = json_decode($request->getBody());
 
-    // Validate and sanitize user inputs
+    // for validating and sanitizing the input data
     $studentname = filter_var($data->studentname, FILTER_SANITIZE_STRING);
     $studentId = filter_var($data->studentId, FILTER_SANITIZE_STRING);
     $sem = filter_var($data->sem, FILTER_SANITIZE_STRING);
@@ -213,7 +197,6 @@ $app->post('/postUpdate', function (Request $request, Response $response, array 
     $office_in_charge = filter_var($data->office_in_charge, FILTER_SANITIZE_STRING);
     $description = filter_var($data->description, FILTER_SANITIZE_STRING);
 
-    // Database
     $servername = "localhost";
     $username = "root";
     $password = "";
@@ -221,13 +204,12 @@ $app->post('/postUpdate', function (Request $request, Response $response, array 
 
     try {
         $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-        // set the PDO error mode to exception
+        // setting the PDO error mode to exception
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         $sql = "UPDATE student_profile SET studentname=?, section=?, sem=?, year=?, amount=?, date=?, office_in_charge=?, description=? WHERE studentId=?";
 
         $stmt = $conn->prepare($sql);
-        // Use the correct variables in the execute method
         $stmt->execute([$studentname, $section, $sem, $year, $amount, $date, $office_in_charge, $description, $studentId]);
 
         $response->getBody()->write(json_encode(array("status" => "success", "data" => null)));
@@ -244,10 +226,9 @@ $app->post('/postUpdate', function (Request $request, Response $response, array 
 $app->delete('/postDelete', function (Request $request, Response $response, array $args) {
     $data = json_decode($request->getBody());
 
-    // Validate and sanitize user inputs
+    // for validating and sanitizing user inputs
     $studentId = filter_var($data->studentId, FILTER_SANITIZE_STRING);
 
-    // Database
     $servername = "localhost";
     $username = "root";
     $password = "";
@@ -255,7 +236,6 @@ $app->delete('/postDelete', function (Request $request, Response $response, arra
 
     try {
         $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-        // set the PDO error mode to exception
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         $sql = "DELETE FROM student_profile WHERE studentId=?";
@@ -275,29 +255,26 @@ $app->delete('/postDelete', function (Request $request, Response $response, arra
 
 //endpoint for history
 $app->get('/posthistory', function (Request $request, Response $response, array $args) {
-    // Database
     $servername = "localhost";
     $username = "root";
     $password = "";
     $dbname = "db_jsites";
 
-    // Create connection
     $conn = new mysqli($servername, $username, $password, $dbname);
 
-    // Check connection
     if ($conn->connect_error) {
         $error = array("status" => "error", "message" => "Connection failed: " . $conn->connect_error);
         $response->getBody()->write(json_encode($error));
         return $response->withHeader('Content-Type', 'application/json')->withStatus(500);
     }
 
-    // Retrieve query parameters
+    // for retrieving query parameters
     $studentId = $request->getQueryParams()['studentId'] ?? null;
     $section = $request->getQueryParams()['section'] ?? null;
-    $sem = $request->getQueryParams()['sem'] ?? null; // Add semester parameter
+    $sem = $request->getQueryParams()['sem'] ?? null; // semester parameter
     $year = $request->getQueryParams()['year'] ?? null;
 
-    // Build the SQL query based on the provided parameters
+    // for building the SQL query based on the provided parameters
     $sql = "SELECT * FROM payment WHERE 1 ";
 
     if ($studentId !== null) {
@@ -308,7 +285,7 @@ $app->get('/posthistory', function (Request $request, Response $response, array 
         $sql .= " AND section = '$section'";
     }
 
-    if ($sem !== null) { // Add condition for semester
+    if ($sem !== null) { // condition for semester
         $sql .= " AND sem = '$sem'";
     }
 

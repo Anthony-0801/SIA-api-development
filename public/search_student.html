@@ -57,8 +57,10 @@
           <input
             type="text"
             id="id_search"
-            value=""
             placeholder="Enter Student ID"
+            oninput="formatSearchID(this)"
+            value=""
+            maxlength="10"
           />&nbsp;
           <input type="button" id="searchBtn" value="SEARCH" />
         </div>
@@ -91,19 +93,24 @@
       <span id="currentPage"></span>
       <button id="nextPage" onclick="changePage(1)">Next</button>
     </div>
+    <!-- Update Modal -->
     <div id="updateModal" class="modal">
       <div class="modal-content">
         <span class="close" onclick="closeUpdateModal()">&times;</span>
 
-        <!-- Update form or content goes here -->
         <h2>Update Student Information</h2>
 
-        <!-- Student Details -->
         <label for="updateName">Student Name:</label>
         <input type="text" id="updateName" />
 
         <label for="updateStudentId">Student ID:</label>
-        <input type="text" id="updateStudentId" />
+        <input
+          type="text"
+          id="updateStudentId"
+          oninput="formatUpdateStudentID(this)"
+          value=""
+          maxlength="10"
+        />
 
         <label for="updateSem">Sem:</label>
         <select id="updateSem" name="sem" required>
@@ -210,6 +217,53 @@
     </script>
 
     <script>
+      function formatSearchID(input) {
+        // for removing non-numeric characters
+        let value = input.value.replace(/\D/g, "");
+
+        // for formatting the input values with hyphens
+        // if the value length is greather than 7 characters, the format will be _ _ _ - _ _ _ _ - _
+        if (value.length > 7) {
+          value =
+            value.substring(0, 3) +
+            "-" +
+            value.substring(3, 7) +
+            "-" +
+            value.substring(7, 12);
+        }
+        // if the value length is lesser than 7 but is greater than 3, the format will be _ _ _ - _ _ _ _ -
+        else if (value.length > 3) {
+          value = value.substring(0, 3) + "-" + value.substring(3, 7);
+        }
+
+        input.value = value;
+      }
+    </script>
+
+    <script>
+      function formatUpdateStudentID(input) {
+        // for removing non-numeric characters
+        let value = input.value.replace(/\D/g, "");
+
+        // for formatting the input values with hyphens
+        // if the value length is greather than 7 characters, the format will be _ _ _ - _ _ _ _ - _
+        if (value.length > 7) {
+          value =
+            value.substring(0, 3) +
+            "-" +
+            value.substring(3, 7) +
+            "-" +
+            value.substring(7, 12);
+        } else if (value.length > 3) {
+          value = value.substring(0, 3) + "-" + value.substring(3, 7);
+        }
+
+        // if the value length is lesser than 7 but is greater than 3, the format will be _ _ _ - _ _ _ _ -
+        input.value = value;
+      }
+    </script>
+
+    <script>
       let totalPages;
       const currentPageSpan = document.getElementById("currentPage");
       let currentPage = 1;
@@ -226,21 +280,18 @@
           rightNav.classList.toggle("show");
         });
 
-        // Close the right navigation when clicking on an element inside .right-nav-top
+        // for closing the right navigation when clicking on an element inside .right-nav-top
         rightNavTop.addEventListener("click", function () {
           rightNav.classList.remove("show");
         });
 
-        // Additional script to handle search functionality
         const searchBtn = document.getElementById("searchBtn");
         searchBtn.addEventListener("click", function () {
           const studentId = document.getElementById("id_search").value;
 
           if (studentId.trim() !== "") {
-            // If student ID is provided, call the fetchData function
             fetchData(studentId);
           } else {
-            // If no student ID is provided, fetch all data
             fetchData();
           }
         });
@@ -270,7 +321,7 @@
           const tbody = document.getElementById("data");
           tbody.innerHTML = "";
 
-          let rowNumber = (currentPage - 1) * 25 + 1; // Initialize row number based on current page
+          let rowNumber = (currentPage - 1) * 25 + 1; // for initializing row number based on current page
 
           data.forEach((student) => {
             if (searchId === "" || student.studentId === searchId) {
@@ -312,13 +363,13 @@
         }
 
         window.deleteStudent = function (studentId) {
-          // Display a confirmation dialog
+          // for the deletion confirmation
           const isConfirmed = confirm(
             "Are you sure you want to delete this student?"
           );
 
           if (isConfirmed) {
-            // Send a DELETE request to the '/postDelete' endpoint
+            // DELETE request for the '/postDelete' endpoint
             fetch("https://jspaysite.fusiontechph.com/public//postDelete", {
               method: "DELETE",
               headers: {
@@ -359,10 +410,8 @@
           const updateModal = document.getElementById("updateModal");
           updateModal.style.display = "block";
 
-          // Store the clicked update button globally
           updateButton = button;
 
-          // Extract data from the button's dataset attribute
           const studentId = button.dataset.studentId || "";
           const studentName = button.dataset.studentName || "";
           const sem = button.dataset.sem || "";
@@ -373,7 +422,7 @@
           const officeInCharge = button.dataset.officeInCharge || "";
           const description = button.dataset.description || "";
 
-          // Populate modal fields with data from the row
+          // for populating modal fields with data from the row
           document.getElementById("updateName").value = studentName;
           document.getElementById("updateStudentId").value = studentId;
           document.getElementById("updateSem").value = sem;
@@ -394,7 +443,6 @@
         window.closeUpdateModal = closeUpdateModal;
 
         function updateStudent() {
-          // Get values from the modal input fields
           const studentname = document.getElementById("updateName").value;
           const studentId = document.getElementById("updateStudentId").value;
           const sem = document.getElementById("updateSem").value;
@@ -408,7 +456,6 @@
           const description =
             document.getElementById("updateDescription").value;
 
-          // Prepare the payload for the update API
           const payload = {
             studentname: studentname,
             studentId: studentId,
@@ -421,7 +468,7 @@
             description: description,
           };
 
-          // Send the update request to the server
+          // UPDATE request for the /postUpdate endpoint
           fetch("https://jspaysite.fusiontechph.com/public/postUpdate", {
             method: "POST",
             headers: {
@@ -436,19 +483,15 @@
               return response.json();
             })
             .then((data) => {
-              // Handle the response data as needed
               console.log("Update response:", data);
 
-              // Close the modal after successful update
               closeUpdateModal();
 
-              // Refresh the data
               fetchData();
               alert("Update successful!");
             })
             .catch((error) => {
               console.error("Error updating student:", error);
-              // Handle the error as needed
             });
         }
 
@@ -472,7 +515,6 @@
           fetchData();
         };
 
-        // Initial fetch on page load
         fetchData();
       });
     </script>
